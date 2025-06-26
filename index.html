@@ -1979,12 +1979,26 @@
             const username = 'hdbookie';
             
             try {
-                // Fetch user data
-                const userResponse = await fetch(`https://api.github.com/users/${username}`);
-                const userData = await userResponse.json();
+                // Check if we're on Netlify (has the API endpoint)
+                const isNetlify = window.location.hostname.includes('netlify') || window.location.hostname === 'hunterbooks.co';
                 
-                // Update repo count
-                document.getElementById('totalRepos').textContent = userData.public_repos;
+                if (isNetlify) {
+                    // Use the secure API endpoint
+                    const statsResponse = await fetch('/.netlify/functions/github-stats');
+                    const stats = await statsResponse.json();
+                    
+                    // Update all stats with real data
+                    document.getElementById('totalRepos').textContent = stats.publicRepos;
+                    document.getElementById('totalContributions').textContent = stats.totalContributions;
+                    document.getElementById('currentStreak').textContent = stats.currentStreak;
+                    
+                    // You can use stats.contributionData to create a custom contribution graph here
+                } else {
+                    // Fallback to public API for local development
+                    const userResponse = await fetch(`https://api.github.com/users/${username}`);
+                    const userData = await userResponse.json();
+                    document.getElementById('totalRepos').textContent = userData.public_repos;
+                }
                 
                 // Fetch recent repos
                 const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`);
