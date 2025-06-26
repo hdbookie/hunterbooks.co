@@ -238,6 +238,99 @@
             overflow: hidden;
         }
         
+        /* Terminal Window */
+        .terminal-window {
+            background: #1a1a1a;
+            border-radius: 10px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: 'Courier New', monospace;
+            animation: slideDown 0.8s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .terminal-header {
+            background: #2a2a2a;
+            padding: 10px 15px;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .terminal-buttons {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .terminal-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: block;
+        }
+        
+        .terminal-btn.red {
+            background: #ff5f56;
+        }
+        
+        .terminal-btn.yellow {
+            background: #ffbd2e;
+        }
+        
+        .terminal-btn.green {
+            background: #27c93f;
+        }
+        
+        .terminal-title {
+            font-size: 0.85rem;
+            color: #999;
+        }
+        
+        .terminal-body {
+            padding: 20px;
+            min-height: 80px;
+        }
+        
+        .terminal-line {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .terminal-prompt {
+            color: #27c93f;
+            font-weight: bold;
+        }
+        
+        .terminal-command {
+            color: #fff;
+            flex: 1;
+        }
+        
+        .terminal-cursor {
+            color: #fff;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
         /* Floating shapes animation */
         .floating-shapes {
             position: absolute;
@@ -375,21 +468,32 @@
             opacity: 0.1;
             white-space: nowrap;
             animation: code-fall 15s infinite linear;
+            text-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+        }
+        
+        .code-line:nth-child(odd) {
+            color: var(--gradient-2);
+            animation-duration: 12s;
+        }
+        
+        .code-line:nth-child(3n) {
+            color: var(--gradient-3);
+            animation-duration: 18s;
         }
         
         @keyframes code-fall {
             0% {
-                transform: translateY(-100px);
+                transform: translateY(-100px) rotate(0deg);
                 opacity: 0;
             }
             10% {
-                opacity: 0.1;
+                opacity: 0.15;
             }
             90% {
-                opacity: 0.1;
+                opacity: 0.15;
             }
             100% {
-                transform: translateY(100vh);
+                transform: translateY(100vh) rotate(10deg);
                 opacity: 0;
             }
         }
@@ -877,6 +981,55 @@
             transform: translateY(-5px);
         }
         
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loading-screen.hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader {
+            text-align: center;
+        }
+        
+        .loader-circle {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loader-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
         /* Loading animations */
         .fade-in {
             opacity: 0;
@@ -1016,6 +1169,14 @@
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <div class="loader-text">Initializing...</div>
+        </div>
+    </div>
+    
     <div class="bg-animation"></div>
     <div class="noise"></div>
     
@@ -1065,6 +1226,23 @@
         <div class="code-rain" id="codeRain"></div>
         
         <div class="hero-content">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="terminal-buttons">
+                        <span class="terminal-btn red"></span>
+                        <span class="terminal-btn yellow"></span>
+                        <span class="terminal-btn green"></span>
+                    </div>
+                    <span class="terminal-title">hunter@portfolio:~$</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">$</span>
+                        <span class="terminal-command" id="terminalText"></span>
+                        <span class="terminal-cursor">|</span>
+                    </div>
+                </div>
+            </div>
             <h1><span data-translate="hero-title-1">Transformo ideias em</span> <span class="gradient-text" data-translate="hero-title-2">soluções digitais</span></h1>
             <p data-translate="hero-subtitle">Desenvolvedor Full Stack especializado em automação e integração de sistemas</p>
             <div class="cta-buttons">
@@ -1623,12 +1801,71 @@
             });
         }
         
+        // Terminal typing animation
+        function typeTerminal() {
+            const commands = [
+                "whoami",
+                "hunter.books",
+                "cat skills.txt",
+                "Flutter • Python • React • Node.js",
+                "git status",
+                "✓ SurfHunter deployed",
+                "✓ 10,000+ active users",
+                "./launch_portfolio.sh"
+            ];
+            
+            const terminalText = document.getElementById('terminalText');
+            let commandIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let isPaused = false;
+            
+            function type() {
+                if (commandIndex >= commands.length) {
+                    commandIndex = 0;
+                }
+                
+                const currentCommand = commands[commandIndex];
+                
+                if (!isDeleting && charIndex < currentCommand.length) {
+                    terminalText.textContent += currentCommand.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(type, 100);
+                } else if (isDeleting && charIndex > 0) {
+                    terminalText.textContent = currentCommand.substring(0, charIndex - 1);
+                    charIndex--;
+                    setTimeout(type, 50);
+                } else if (!isDeleting && charIndex === currentCommand.length && !isPaused) {
+                    isPaused = true;
+                    setTimeout(() => {
+                        isPaused = false;
+                        isDeleting = true;
+                        type();
+                    }, 2000);
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    commandIndex++;
+                    setTimeout(type, 500);
+                }
+            }
+            
+            setTimeout(() => {
+                type();
+            }, 1000);
+        }
+        
         // Initialize animations on page load
         window.addEventListener('load', () => {
+            // Hide loading screen after a short delay
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hide');
+            }, 1500);
+            
             initializeLanguage();
             createParticles();
             createCodeRain();
             createCursorTrail();
+            typeTerminal();
             console.log('Portfolio loaded successfully!');
         });
     </script>
