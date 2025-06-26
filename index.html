@@ -1475,9 +1475,15 @@
             <div class="github-calendar" id="githubCalendar">
                 <div class="calendar-loading">Loading GitHub activity...</div>
             </div>
-            <div class="github-contrib-graph" style="margin-top: 30px;">
+            <div class="github-contrib-graph" style="margin-top: 30px; background: var(--bg-card); padding: 20px; border-radius: 20px; border: 1px solid var(--border);">
+                <h3 style="margin-bottom: 20px; font-size: 1.2rem;">Contribution Activity</h3>
                 <!-- GitHub Contribution Graph -->
                 <img src="https://ghchart.rshah.org/3b82f6/hdbookie" alt="GitHub Contributions" style="width: 100%; max-width: 100%;" />
+                
+                <!-- Alternative styled graph -->
+                <div style="margin-top: 20px; padding: 20px; background: #0d1117; border-radius: 10px;">
+                    <img src="https://github-readme-streak-stats.herokuapp.com/?user=hdbookie&theme=dark&hide_border=true&background=0D1117&ring=3b82f6&fire=3b82f6&currStreakLabel=3b82f6" alt="GitHub Streak" style="width: 100%;" />
+                </div>
             </div>
             <div class="recent-repos" id="recentRepos">
                 <h3>Recent Projects</h3>
@@ -1983,36 +1989,15 @@
             const username = 'hdbookie';
             
             try {
-                // Check if we're on Netlify (has the API endpoint)
-                const isNetlify = window.location.hostname.includes('netlify') || window.location.hostname === 'hunterbooks.co';
+                // Fetch user data from public API
+                const userResponse = await fetch(`https://api.github.com/users/${username}`);
+                const userData = await userResponse.json();
                 
-                if (isNetlify) {
-                    // Use the secure API endpoint
-                    try {
-                        const statsResponse = await fetch('/.netlify/functions/github-stats');
-                        if (!statsResponse.ok) {
-                            throw new Error(`API returned ${statsResponse.status}`);
-                        }
-                        const stats = await statsResponse.json();
-                        console.log('GitHub Stats:', stats);
-                        
-                        // Update all stats with real data
-                        document.getElementById('totalRepos').textContent = stats.totalRepos || stats.publicRepos || '--';
-                        document.getElementById('totalContributions').textContent = stats.totalContributions || '--';
-                        document.getElementById('currentStreak').textContent = stats.currentStreak || '0';
-                    } catch (apiError) {
-                        console.error('Failed to fetch from API:', apiError);
-                        // Fall back to public API
-                        const userResponse = await fetch(`https://api.github.com/users/${username}`);
-                        const userData = await userResponse.json();
-                        document.getElementById('totalRepos').textContent = userData.public_repos;
-                    }
-                } else {
-                    // Fallback to public API for local development
-                    const userResponse = await fetch(`https://api.github.com/users/${username}`);
-                    const userData = await userResponse.json();
-                    document.getElementById('totalRepos').textContent = userData.public_repos;
-                }
+                // Update repo count
+                document.getElementById('totalRepos').textContent = userData.public_repos;
+                
+                // Hide the github calendar loading div since we're using images
+                document.getElementById('githubCalendar').style.display = 'none';
                 
                 // Fetch recent repos
                 const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`);
