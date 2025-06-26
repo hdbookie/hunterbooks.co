@@ -1475,6 +1475,10 @@
             <div class="github-calendar" id="githubCalendar">
                 <div class="calendar-loading">Loading GitHub activity...</div>
             </div>
+            <div class="github-contrib-graph" style="margin-top: 30px;">
+                <!-- GitHub Contribution Graph -->
+                <img src="https://ghchart.rshah.org/3b82f6/hdbookie" alt="GitHub Contributions" style="width: 100%; max-width: 100%;" />
+            </div>
             <div class="recent-repos" id="recentRepos">
                 <h3>Recent Projects</h3>
                 <div class="repos-grid" id="reposGrid">
@@ -1984,15 +1988,25 @@
                 
                 if (isNetlify) {
                     // Use the secure API endpoint
-                    const statsResponse = await fetch('/.netlify/functions/github-stats');
-                    const stats = await statsResponse.json();
-                    
-                    // Update all stats with real data
-                    document.getElementById('totalRepos').textContent = stats.publicRepos;
-                    document.getElementById('totalContributions').textContent = stats.totalContributions;
-                    document.getElementById('currentStreak').textContent = stats.currentStreak;
-                    
-                    // You can use stats.contributionData to create a custom contribution graph here
+                    try {
+                        const statsResponse = await fetch('/.netlify/functions/github-stats');
+                        if (!statsResponse.ok) {
+                            throw new Error(`API returned ${statsResponse.status}`);
+                        }
+                        const stats = await statsResponse.json();
+                        console.log('GitHub Stats:', stats);
+                        
+                        // Update all stats with real data
+                        document.getElementById('totalRepos').textContent = stats.totalRepos || stats.publicRepos || '--';
+                        document.getElementById('totalContributions').textContent = stats.totalContributions || '--';
+                        document.getElementById('currentStreak').textContent = stats.currentStreak || '0';
+                    } catch (apiError) {
+                        console.error('Failed to fetch from API:', apiError);
+                        // Fall back to public API
+                        const userResponse = await fetch(`https://api.github.com/users/${username}`);
+                        const userData = await userResponse.json();
+                        document.getElementById('totalRepos').textContent = userData.public_repos;
+                    }
                 } else {
                     // Fallback to public API for local development
                     const userResponse = await fetch(`https://api.github.com/users/${username}`);
