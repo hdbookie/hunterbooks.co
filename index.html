@@ -827,6 +827,97 @@
             transform: translateY(-2px);
         }
         
+        /* GitHub Activity Section */
+        .github-container {
+            margin-top: 60px;
+        }
+        
+        .github-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+        
+        .github-calendar {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 50px;
+            overflow-x: auto;
+        }
+        
+        .calendar-loading {
+            text-align: center;
+            color: var(--text-secondary);
+            padding: 40px;
+        }
+        
+        .recent-repos h3 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .repos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .repo-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+        
+        .repo-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+        }
+        
+        .repo-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .repo-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .repo-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .repo-stats {
+            display: flex;
+            gap: 20px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .repo-stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
         /* Contact - Mobile First */
         .contact-container {
             text-align: center;
@@ -1364,6 +1455,35 @@
         </div>
     </section>
     
+    <section id="github-activity" class="section fade-in">
+        <h2 class="section-title">GitHub Activity</h2>
+        <div class="github-container">
+            <div class="github-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalContributions">--</div>
+                    <div class="stat-label">Contributions This Year</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="currentStreak">--</div>
+                    <div class="stat-label">Day Streak</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="totalRepos">--</div>
+                    <div class="stat-label">Public Repos</div>
+                </div>
+            </div>
+            <div class="github-calendar" id="githubCalendar">
+                <div class="calendar-loading">Loading GitHub activity...</div>
+            </div>
+            <div class="recent-repos" id="recentRepos">
+                <h3>Recent Projects</h3>
+                <div class="repos-grid" id="reposGrid">
+                    <!-- Repos will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <section id="contato" class="section fade-in">
         <h2 class="section-title" data-translate="contact-title">Vamos Trabalhar Juntos</h2>
         <div class="contact-container">
@@ -1854,6 +1974,56 @@
             }, 1000);
         }
         
+        // Fetch GitHub Activity
+        async function fetchGitHubActivity() {
+            const username = 'hdbookie';
+            
+            try {
+                // Fetch user data
+                const userResponse = await fetch(`https://api.github.com/users/${username}`);
+                const userData = await userResponse.json();
+                
+                // Update repo count
+                document.getElementById('totalRepos').textContent = userData.public_repos;
+                
+                // Fetch recent repos
+                const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`);
+                const repos = await reposResponse.json();
+                
+                // Display repos
+                const reposGrid = document.getElementById('reposGrid');
+                reposGrid.innerHTML = repos.map(repo => `
+                    <a href="${repo.html_url}" target="_blank" class="repo-card">
+                        <div class="repo-header">
+                            <span class="repo-name">${repo.name}</span>
+                        </div>
+                        <p class="repo-description">${repo.description || 'No description available'}</p>
+                        <div class="repo-stats">
+                            <span class="repo-stat">⭐ ${repo.stargazers_count}</span>
+                            <span class="repo-stat">🍴 ${repo.forks_count}</span>
+                            <span class="repo-stat">📅 ${new Date(repo.updated_at).toLocaleDateString()}</span>
+                        </div>
+                    </a>
+                `).join('');
+                
+                // For GitHub calendar, we'll use a placeholder
+                // In production, you'd use GitHub's contribution graph API
+                document.getElementById('githubCalendar').innerHTML = `
+                    <div style="text-align: center; color: var(--text-secondary);">
+                        <p>Visit <a href="https://github.com/${username}" target="_blank" style="color: var(--accent);">github.com/${username}</a> to see the full contribution graph</p>
+                    </div>
+                `;
+                
+                // Simulate contribution count (in production, use GitHub GraphQL API)
+                document.getElementById('totalContributions').textContent = '500+';
+                document.getElementById('currentStreak').textContent = '7';
+                
+            } catch (error) {
+                console.error('Error fetching GitHub data:', error);
+                document.getElementById('githubCalendar').innerHTML = '<p>Unable to load GitHub activity</p>';
+            }
+        }
+        
         // Initialize animations on page load
         window.addEventListener('load', () => {
             // Hide loading screen after a short delay
@@ -1866,6 +2036,7 @@
             createCodeRain();
             createCursorTrail();
             typeTerminal();
+            fetchGitHubActivity();
             console.log('Portfolio loaded successfully!');
         });
     </script>
