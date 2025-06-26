@@ -2006,17 +2006,48 @@
                     </a>
                 `).join('');
                 
-                // For GitHub calendar, we'll use a placeholder
-                // In production, you'd use GitHub's contribution graph API
+                // Use GitHub Stats Card and Activity Graph
                 document.getElementById('githubCalendar').innerHTML = `
-                    <div style="text-align: center; color: var(--text-secondary);">
-                        <p>Visit <a href="https://github.com/${username}" target="_blank" style="color: var(--accent);">github.com/${username}</a> to see the full contribution graph</p>
+                    <div style="text-align: center; display: flex; flex-direction: column; gap: 20px;">
+                        <img src="https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=dark&hide_border=true&bg_color=0a0a0a&text_color=ffffff&title_color=3b82f6&icon_color=3b82f6" alt="GitHub Stats" style="max-width: 100%;">
+                        <img src="https://github-readme-activity-graph.vercel.app/graph?username=${username}&theme=react-dark&bg_color=0a0a0a&color=ffffff&line=3b82f6&point=3b82f6&hide_border=true" alt="Contribution Graph" style="max-width: 100%;">
                     </div>
                 `;
                 
-                // Simulate contribution count (in production, use GitHub GraphQL API)
-                document.getElementById('totalContributions').textContent = '500+';
-                document.getElementById('currentStreak').textContent = '7';
+                // Fetch contribution data from GitHub GraphQL API (public data)
+                // For now, we'll use the stats from the profile
+                const eventsResponse = await fetch(`https://api.github.com/users/${username}/events/public`);
+                const events = await eventsResponse.json();
+                
+                // Count recent contributions (rough estimate based on recent events)
+                const recentContributions = events.filter(event => {
+                    const eventDate = new Date(event.created_at);
+                    const daysDiff = (new Date() - eventDate) / (1000 * 60 * 60 * 24);
+                    return daysDiff <= 365;
+                }).length;
+                
+                // Calculate streak (simplified - counts consecutive days with events)
+                const today = new Date();
+                let streak = 0;
+                let currentDate = new Date(today);
+                
+                for (let i = 0; i < 30; i++) {
+                    const dateStr = currentDate.toISOString().split('T')[0];
+                    const hasActivity = events.some(event => 
+                        event.created_at.startsWith(dateStr)
+                    );
+                    
+                    if (hasActivity) {
+                        streak++;
+                    } else if (streak > 0) {
+                        break;
+                    }
+                    
+                    currentDate.setDate(currentDate.getDate() - 1);
+                }
+                
+                document.getElementById('totalContributions').textContent = `${recentContributions}+`;
+                document.getElementById('currentStreak').textContent = streak || '0';
                 
             } catch (error) {
                 console.error('Error fetching GitHub data:', error);
