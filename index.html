@@ -745,6 +745,7 @@
             text-align: center;
             position: relative;
             z-index: 10;
+            cursor: pointer;
         }
         
         .contact-card:hover {
@@ -762,18 +763,18 @@
             margin-bottom: 10px;
         }
         
-        .contact-card a {
-            color: var(--text-secondary);
+        .contact-card-link {
             text-decoration: none;
-            transition: color 0.3s;
+            color: inherit;
             display: block;
-            text-align: center;
-            position: relative;
-            z-index: 10;
-            pointer-events: auto;
         }
         
-        .contact-card a:hover {
+        .contact-card span {
+            color: var(--text-secondary);
+            transition: color 0.3s;
+        }
+        
+        .contact-card:hover span {
             color: var(--accent);
         }
         
@@ -1194,31 +1195,41 @@
             </p>
             
             <div class="contact-grid">
-                <div class="contact-card">
-                    <div class="contact-icon">📧</div>
-                    <h4>Email</h4>
-                    <a href="mailto:hdbooks15@gmail.com">hdbooks15@gmail.com</a>
-                </div>
-                <div class="contact-card">
-                    <div class="contact-icon">💼</div>
-                    <h4>LinkedIn</h4>
-                    <a href="https://www.linkedin.com/in/hunter-books-6a070467/" target="_blank">/in/hunter-books</a>
-                </div>
-                <div class="contact-card">
-                    <div class="contact-icon">📷</div>
-                    <h4>Instagram</h4>
-                    <a href="https://www.instagram.com/hunterbooks_/" target="_blank">@hunterbooks_</a>
-                </div>
-                <div class="contact-card">
-                    <div class="contact-icon">💬</div>
-                    <h4>WhatsApp</h4>
-                    <a href="https://wa.me/16512397167" target="_blank">+1 (651) 239-7167</a>
-                </div>
-                <div class="contact-card">
-                    <div class="contact-icon">🐙</div>
-                    <h4>GitHub</h4>
-                    <a href="https://github.com/hdbookie" target="_blank">@hdbookie</a>
-                </div>
+                <a href="mailto:hdbooks15@gmail.com" class="contact-card-link">
+                    <div class="contact-card">
+                        <div class="contact-icon">📧</div>
+                        <h4>Email</h4>
+                        <span>hdbooks15@gmail.com</span>
+                    </div>
+                </a>
+                <a href="https://www.linkedin.com/in/hunter-books-6a070467/" target="_blank" class="contact-card-link">
+                    <div class="contact-card">
+                        <div class="contact-icon">💼</div>
+                        <h4>LinkedIn</h4>
+                        <span>/in/hunter-books</span>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/hunterbooks_/" target="_blank" class="contact-card-link">
+                    <div class="contact-card">
+                        <div class="contact-icon">📷</div>
+                        <h4>Instagram</h4>
+                        <span>@hunterbooks_</span>
+                    </div>
+                </a>
+                <a href="https://wa.me/16512397167" target="_blank" class="contact-card-link">
+                    <div class="contact-card">
+                        <div class="contact-icon">💬</div>
+                        <h4>WhatsApp</h4>
+                        <span>+1 (651) 239-7167</span>
+                    </div>
+                </a>
+                <a href="https://github.com/hdbookie" target="_blank" class="contact-card-link">
+                    <div class="contact-card">
+                        <div class="contact-icon">🐙</div>
+                        <h4>GitHub</h4>
+                        <span>@hdbookie</span>
+                    </div>
+                </a>
             </div>
             
         </div>
