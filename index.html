@@ -251,6 +251,13 @@
             animation: slideDown 0.8s ease-out;
         }
         
+        @media (max-width: 768px) {
+            .terminal-window {
+                margin-bottom: 120px; /* Extra space for mobile browser UI */
+                max-width: 90%;
+            }
+        }
+        
         @keyframes slideDown {
             from {
                 opacity: 0;
