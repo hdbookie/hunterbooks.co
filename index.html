@@ -4,237 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hunter - Desenvolvedor de Software</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --bg-dark: #000000;
-            --bg-card: #0a0a0a;
-            --text-primary: #ffffff;
-            --text-secondary: #a1a1aa;
-            --accent: #3b82f6;
-            --accent-glow: #60a5fa;
-            --border: #27272a;
-            --gradient-1: #3b82f6;
-            --gradient-2: #8b5cf6;
-            --gradient-3: #ec4899;
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-        
-        /* Language Switcher */
-        .language-switcher {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1002;
-            display: flex;
-            gap: 6px;
-            background: rgba(0, 0, 0, 0.9);
-            padding: 6px;
-            border-radius: 20px;
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--border);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        @media (max-width: 768px) {
-            .language-switcher {
-                top: 10px;
-                right: 10px;
-            }
-        }
-        
-        .lang-btn {
-            padding: 4px 8px;
-            background: transparent;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            border-radius: 12px;
-            transition: all 0.3s;
-            font-size: 0.8rem;
-            font-weight: 500;
-            min-width: 28px;
-        }
-        
-        .lang-btn.active {
-            background: var(--accent);
-            color: white;
-        }
-        
-        .lang-btn:hover {
-            color: white;
-        }
-        
-        /* Animated background */
-        .bg-animation {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            opacity: 0.5;
-            background: radial-gradient(circle at 20% 50%, var(--gradient-1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, var(--gradient-2) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 20%, var(--gradient-3) 0%, transparent 50%);
-            filter: blur(100px);
-            animation: float 20s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(-20px, -20px) scale(1.1); }
-            66% { transform: translate(20px, -10px) scale(0.9); }
-        }
-        
-        .noise {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            opacity: 0.02;
-            z-index: -1;
-            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii45IiBudW1PY3RhdmVzPSI0IiBzZWVkPSI1Ii8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2EpIiBvcGFjaXR5PSIuMDUiLz48L3N2Zz4=');
-        }
-        
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 50px;
-            backdrop-filter: blur(10px);
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            border-bottom: 1px solid var(--border);
-            transition: all 0.3s;
-        }
-        
-        nav.scrolled {
-            background: rgba(0, 0, 0, 0.9);
-            padding: 15px 50px;
-        }
-        
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, var(--gradient-1), var(--gradient-2));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.02em;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s;
-            position: relative;
-        }
-        
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: width 0.3s;
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        /* Mobile menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        .mobile-nav {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(20px);
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: left 0.3s;
-        }
-        
-        .mobile-nav.active {
-            left: 0;
-        }
-        
-        .mobile-nav a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 1.5rem;
-            margin: 20px 0;
-            transition: color 0.3s;
-        }
-        
-        .mobile-nav a:hover {
-            color: var(--accent);
-        }
-        
-        .close-mobile-menu {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 2rem;
-            cursor: pointer;
-        }
-        
-        /* Hero Section */
+        /* Page-specific styles only */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -247,274 +24,7 @@
         
         @media (max-width: 768px) {
             .hero {
-                padding-top: 115px; /* Extra space for mobile app bar and language selector */
-            }
-        }
-        
-        /* Terminal Window */
-        .terminal-window {
-            background: #1a1a1a;
-            border-radius: 10px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            font-family: 'Courier New', monospace;
-            animation: slideDown 0.8s ease-out;
-        }
-        
-        @media (max-width: 768px) {
-            .terminal-window {
-                margin-bottom: 120px; /* Extra space for mobile browser UI */
-                max-width: 90%;
-            }
-        }
-        
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .terminal-header {
-            background: #2a2a2a;
-            padding: 10px 15px;
-            border-radius: 10px 10px 0 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .terminal-buttons {
-            display: flex;
-            gap: 8px;
-        }
-        
-        .terminal-btn {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            display: block;
-        }
-        
-        .terminal-btn.red {
-            background: #ff5f56;
-        }
-        
-        .terminal-btn.yellow {
-            background: #ffbd2e;
-        }
-        
-        .terminal-btn.green {
-            background: #27c93f;
-        }
-        
-        .terminal-title {
-            font-size: 0.85rem;
-            color: #999;
-        }
-        
-        .terminal-body {
-            padding: 20px;
-            min-height: 80px;
-        }
-        
-        .terminal-line {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .terminal-prompt {
-            color: #27c93f;
-            font-weight: bold;
-        }
-        
-        .terminal-command {
-            color: #fff;
-            flex: 1;
-        }
-        
-        .terminal-cursor {
-            color: #fff;
-            animation: blink 1s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        
-        /* Floating shapes animation */
-        .floating-shapes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--gradient-1), var(--gradient-2));
-            opacity: 0.1;
-            animation: float-shapes 15s infinite ease-in-out;
-        }
-        
-        .shape:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-        
-        .shape:nth-child(2) {
-            width: 120px;
-            height: 120px;
-            top: 60%;
-            right: 15%;
-            animation-delay: -3s;
-            background: linear-gradient(45deg, var(--gradient-2), var(--gradient-3));
-        }
-        
-        .shape:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            top: 80%;
-            left: 20%;
-            animation-delay: -6s;
-        }
-        
-        .shape:nth-child(4) {
-            width: 100px;
-            height: 100px;
-            top: 30%;
-            right: 30%;
-            animation-delay: -9s;
-            background: linear-gradient(45deg, var(--gradient-3), var(--gradient-1));
-        }
-        
-        .shape:nth-child(5) {
-            width: 40px;
-            height: 40px;
-            top: 10%;
-            right: 10%;
-            animation-delay: -12s;
-        }
-        
-        @keyframes float-shapes {
-            0%, 100% {
-                transform: translateY(0px) rotate(0deg);
-                opacity: 0.1;
-            }
-            50% {
-                transform: translateY(-20px) rotate(180deg);
-                opacity: 0.3;
-            }
-        }
-        
-        /* Particles */
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: particles 20s infinite linear;
-        }
-        
-        .particle:nth-child(odd) {
-            background: var(--gradient-2);
-        }
-        
-        .particle:nth-child(3n) {
-            background: var(--gradient-3);
-        }
-        
-        @keyframes particles {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        /* Code rain effect */
-        .code-rain {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
-        
-        .code-line {
-            position: absolute;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            color: var(--accent);
-            opacity: 0.1;
-            white-space: nowrap;
-            animation: code-fall 15s infinite linear;
-            text-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
-        }
-        
-        .code-line:nth-child(odd) {
-            color: var(--gradient-2);
-            animation-duration: 12s;
-        }
-        
-        .code-line:nth-child(3n) {
-            color: var(--gradient-3);
-            animation-duration: 18s;
-        }
-        
-        @keyframes code-fall {
-            0% {
-                transform: translateY(-100px) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.15;
-            }
-            90% {
-                opacity: 0.15;
-            }
-            100% {
-                transform: translateY(100vh) rotate(10deg);
-                opacity: 0;
+                padding-top: 115px;
             }
         }
         
@@ -526,155 +36,27 @@
             z-index: 10;
         }
         
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .hero h1 {
-            font-size: clamp(3rem, 8vw, 5rem);
+        .hero-title {
+            font-size: 4rem;
             font-weight: 800;
             margin-bottom: 20px;
-            letter-spacing: -0.03em;
             line-height: 1.1;
         }
         
         .gradient-text {
-            background: linear-gradient(45deg, var(--gradient-1), var(--gradient-2), var(--gradient-3));
+            background: linear-gradient(135deg, var(--gradient-1), var(--gradient-2), var(--gradient-3));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-size: 200% 200%;
-            animation: gradient 5s ease infinite;
+            background-clip: text;
         }
         
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .hero p {
+        .hero-subtitle {
             font-size: 1.25rem;
             color: var(--text-secondary);
-            margin-bottom: 40px;
-            font-weight: 300;
+            margin-bottom: 30px;
         }
         
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-        
-        .btn-primary {
-            background: var(--accent);
-            color: white;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.7);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--text-secondary);
-        }
-        
-        /* Photo Gallery - Mobile First */
-        .photo-gallery {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            margin-top: 60px;
-        }
-        
-        .photo-card {
-            position: relative;
-            overflow: hidden;
-            border-radius: 20px;
-            aspect-ratio: 1;
-            cursor: pointer;
-            transition: transform 0.3s;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-        }
-        
-        .photo-card:hover {
-            transform: scale(1.05);
-        }
-        
-        .photo-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .photo-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: var(--text-secondary);
-        }
-        
-        /* Sections */
-        .section {
-            padding: 50px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 50px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--gradient-1), var(--gradient-2));
-            border-radius: 2px;
-        }
-        
-        /* About Section - Mobile First */
+        /* Sections specific styles */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -683,23 +65,39 @@
             margin-top: 60px;
         }
         
-        .about-content {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
-        
-        .about-text {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-        
         .about-text p {
-            margin-bottom: 20px;
+            margin-bottom: 2rem;
         }
         
-        /* Stats - Mobile First */
+        .about-text p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .testimonials-container {
+            max-width: 800px;
+            margin: 60px auto 0;
+            position: relative;
+        }
+        
+        .github-container {
+            margin-top: 60px;
+        }
+        
+        /* Additional component styles */
         .stats {
             display: grid;
             grid-template-columns: 1fr;
@@ -716,189 +114,20 @@
             transition: all 0.3s;
         }
         
-        .stat-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
-        }
-        
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 10px;
-        }
-        
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-        
-        /* Projects - Mobile First */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            margin-top: 60px;
-        }
-        
-        .project-card {
+        .skill-card {
             background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 40px;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--gradient-1), var(--gradient-2));
-            transform: scaleX(0);
-            transition: transform 0.3s;
-        }
-        
-        .project-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .project-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
-        }
-        
-        .project-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(45deg, var(--gradient-1), var(--gradient-2));
+            padding: 20px;
             border-radius: 15px;
+            border: 1px solid var(--border);
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-        
-        .project-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        
-        .project-tech {
-            color: var(--accent);
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-        }
-        
-        .project-description {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-        
-        /* Skills */
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
             gap: 15px;
-            justify-content: center;
-            margin-top: 60px;
-        }
-        
-        .skill-tag {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 0.9rem;
             transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
         }
         
-        .skill-tag::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(59, 130, 246, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s;
-        }
-        
-        .skill-tag:hover::before {
-            width: 100%;
-            height: 100%;
-        }
-        
-        .skill-tag:hover {
-            color: var(--accent);
+        .skill-card:hover {
+            transform: translateY(-3px);
             border-color: var(--accent);
-            transform: translateY(-2px);
-        }
-        
-        /* Testimonials Section */
-        .testimonials-container {
-            max-width: 800px;
-            margin: 60px auto 0;
-            position: relative;
-        }
-        
-        .testimonial-card {
-            display: none;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 50px;
-            text-align: center;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .testimonial-card.active {
-            display: block;
-        }
-        
-        .quote-mark {
-            font-size: 4rem;
-            color: var(--accent);
-            line-height: 1;
-            margin-bottom: 20px;
-            font-family: Georgia, serif;
-        }
-        
-        .rating {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            letter-spacing: 5px;
-        }
-        
-        .testimonial-text {
-            font-size: 1.25rem;
-            line-height: 1.8;
-            color: var(--text-primary);
-            margin-bottom: 30px;
-            font-style: italic;
-        }
-        
-        .testimonial-author h4 {
-            font-size: 1.1rem;
-            color: var(--text-primary);
-            margin-bottom: 5px;
-        }
-        
-        .testimonial-author p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
         }
         
         .testimonial-nav {
@@ -910,20 +139,16 @@
         }
         
         .testimonial-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 2rem;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: color 0.3s;
         }
         
         .testimonial-btn:hover {
-            background: var(--accent);
-            border-color: var(--accent);
+            color: var(--accent);
         }
         
         .testimonial-dots {
@@ -946,220 +171,47 @@
             border-radius: 5px;
         }
         
-        /* GitHub Activity Section */
-        .github-container {
-            margin-top: 60px;
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: var(--bg-dark);
+            border-left: 1px solid var(--border);
+            padding: 80px 30px 30px;
+            transition: right 0.3s ease;
+            z-index: 1001;
         }
         
-        .github-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 50px;
+        .mobile-nav.active {
+            right: 0;
         }
         
-        .github-calendar {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 50px;
-            overflow-x: auto;
-        }
-        
-        .calendar-loading {
-            text-align: center;
-            color: var(--text-secondary);
-            padding: 40px;
-        }
-        
-        .recent-repos h3 {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .repos-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        
-        .repo-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            padding: 25px;
-            transition: all 0.3s;
-            cursor: pointer;
-            text-decoration: none;
+        .mobile-nav a {
             display: block;
-            color: inherit;
-        }
-        
-        .repo-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
-        }
-        
-        .repo-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-        
-        .repo-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--accent);
+            color: var(--text-primary);
             text-decoration: none;
-        }
-        
-        .repo-description {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            line-height: 1.5;
-        }
-        
-        .repo-stats {
-            display: flex;
-            gap: 20px;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-        
-        .repo-stat {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        /* Contact - Mobile First */
-        .contact-container {
-            text-align: center;
-            margin-top: 60px;
-        }
-        
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-            margin-top: 50px;
-        }
-        
-        .contact-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            padding: 30px;
-            border-radius: 20px;
-            transition: all 0.3s;
-            text-align: center;
-            position: relative;
-            z-index: 10;
-            cursor: pointer;
-        }
-        
-        .contact-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-        }
-        
-        .contact-icon {
-            font-size: 2rem;
-            margin-bottom: 15px;
-        }
-        
-        .contact-card h4 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-        }
-        
-        .contact-card-link {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-        
-        .contact-card span {
-            color: var(--text-secondary);
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
             transition: color 0.3s;
         }
         
-        .contact-card:hover span {
+        .mobile-nav a:hover {
             color: var(--accent);
         }
         
-        /* Contact Form */
-        .contact-form {
-            max-width: 600px;
-            margin: 50px auto 0;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 40px;
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 16px;
-            background: transparent;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            color: var(--text-primary);
-            font-family: inherit;
-            transition: border-color 0.3s;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-        
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-        
-        .form-submit {
-            width: 100%;
-            padding: 15px;
-            background: var(--accent);
-            color: white;
+        .close-mobile-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
             border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 2rem;
             cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .form-submit:hover {
-            background: var(--accent-glow);
-            transform: translateY(-2px);
-        }
-        
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 50px 20px;
-            border-top: 1px solid var(--border);
-            color: var(--text-secondary);
         }
         
         /* Scroll to top button */
@@ -1170,123 +222,40 @@
             width: 50px;
             height: 50px;
             background: var(--accent);
+            color: white;
             border: none;
             border-radius: 50%;
-            color: white;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             cursor: pointer;
             opacity: 0;
-            transform: translateY(100px);
+            pointer-events: none;
             transition: all 0.3s;
-            z-index: 1000;
+            z-index: 999;
         }
         
         .scroll-top.visible {
             opacity: 1;
-            transform: translateY(0);
+            pointer-events: all;
         }
         
         .scroll-top:hover {
-            background: var(--accent-glow);
             transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
         }
         
-        /* Loading Screen */
-        .loading-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--bg-dark);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.5s ease;
-        }
-        
-        .loading-screen.hide {
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        .loader {
-            text-align: center;
-        }
-        
-        .loader-circle {
-            width: 60px;
-            height: 60px;
-            margin: 0 auto 20px;
-            border: 3px solid var(--border);
-            border-top-color: var(--accent);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        .loader-text {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-        
-        /* Loading animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-        
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Small tablets and up */
-        @media (min-width: 480px) {
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 25px;
-            }
-            
-            .photo-gallery {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .contact-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 25px;
-            }
-        }
-        
-        /* Tablets and up */
+        /* Responsive */
         @media (min-width: 768px) {
             .about-grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 60px;
             }
             
-            .projects-grid {
+            .stats {
                 grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .contact-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 30px;
+                gap: 25px;
             }
         }
         
-        /* Desktop and up */
         @media (min-width: 1024px) {
             .language-switcher {
                 top: 15px;
@@ -1300,80 +269,15 @@
                 font-size: 0.75rem;
                 min-width: 26px;
             }
-            
-            .projects-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-            
-            .contact-grid {
-                grid-template-columns: repeat(5, 1fr);
-            }
         }
         
-        /* Mobile specific overrides */
-        @media (max-width: 767px) {
-            .language-switcher {
-                top: 75px;
-                right: 15px;
-                padding: 4px;
-                gap: 4px;
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
             }
             
-            .lang-btn {
-                padding: 3px 6px;
-                font-size: 0.7rem;
-                min-width: 24px;
-            }
-            
-            nav {
-                padding: 15px 20px;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .hero h1 {
-                font-size: 3rem;
-            }
-            
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-            
-            .about-content {
-                gap: 30px;
-            }
-            
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-            
-            .photo-gallery {
-                grid-template-columns: 1fr;
-            }
-            
-            .section {
-                padding: 30px 20px;
-            }
-            
-            .contact-form {
-                margin: 30px 20px 0;
-                padding: 30px;
+            .hero-subtitle {
+                font-size: 1rem;
             }
         }
     </style>
@@ -1383,13 +287,15 @@
     <div class="loading-screen" id="loadingScreen">
         <div class="loader">
             <div class="loader-circle"></div>
-            <div class="loader-text">Initializing...</div>
+            <p class="loader-text">Carregando...</p>
         </div>
     </div>
-    
+
+    <!-- Animated Background -->
     <div class="bg-animation"></div>
     <div class="noise"></div>
-    
+    <div id="particles"></div>
+
     <!-- Language Switcher -->
     <div class="language-switcher">
         <button class="lang-btn active" data-lang="pt">PT</button>
@@ -1397,6 +303,7 @@
         <button class="lang-btn" data-lang="es">ES</button>
     </div>
     
+    <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-content">
             <div class="logo">HunterBooks.co</div>
@@ -1419,210 +326,220 @@
         <a href="#contato" data-translate="nav-contact">Contato</a>
     </div>
     
+    <!-- Hero Section -->
     <section class="hero">
-        <!-- Floating shapes -->
         <div class="floating-shapes">
             <div class="shape"></div>
             <div class="shape"></div>
             <div class="shape"></div>
-            <div class="shape"></div>
-            <div class="shape"></div>
         </div>
-        
-        <!-- Particles -->
-        <div class="particles" id="particles"></div>
-        
-        <!-- Code rain -->
-        <div class="code-rain" id="codeRain"></div>
-        
         <div class="hero-content">
             <div class="terminal-window">
                 <div class="terminal-header">
                     <div class="terminal-buttons">
-                        <span class="terminal-btn red"></span>
-                        <span class="terminal-btn yellow"></span>
-                        <span class="terminal-btn green"></span>
+                        <button class="terminal-btn close"></button>
+                        <button class="terminal-btn minimize"></button>
+                        <button class="terminal-btn maximize"></button>
                     </div>
-                    <span class="terminal-title">hunter@portfolio:~$</span>
+                    <span style="color: #a1a1aa; font-size: 0.8rem;">hunter@portfolio</span>
                 </div>
                 <div class="terminal-body">
-                    <div class="terminal-line">
-                        <span class="terminal-prompt">$</span>
-                        <span class="terminal-command" id="terminalText"></span>
-                        <span class="terminal-cursor">|</span>
-                    </div>
+                    <!-- Terminal content will be typed here -->
                 </div>
             </div>
-            <h1><span data-translate="hero-title-1">Transformo ideias em</span> <span class="gradient-text" data-translate="hero-title-2">soluções digitais</span></h1>
-            <p data-translate="hero-subtitle">Desenvolvedor Full Stack especializado em automação e integração de sistemas</p>
+            <h1 class="hero-title">
+                <span data-translate="hero-title-1">Transformo ideias em</span><br>
+                <span class="gradient-text" data-translate="hero-title-2">soluções digitais</span>
+            </h1>
+            <p class="hero-subtitle" data-translate="hero-subtitle">
+                Desenvolvedor Full Stack especializado em automação e integração de sistemas
+            </p>
             <div class="cta-buttons">
-                <a href="#projetos" class="btn btn-primary" data-translate="hero-cta-projects">Ver Projetos</a>
-                <a href="#contato" class="btn btn-secondary" data-translate="hero-cta-contact">Entrar em Contato</a>
+                <a href="#projetos" class="btn btn-primary">
+                    <span data-translate="hero-cta-projects">Ver Projetos</span> →
+                </a>
+                <a href="#contato" class="btn btn-secondary">
+                    <span data-translate="hero-cta-contact">Entrar em Contato</span>
+                </a>
             </div>
         </div>
     </section>
     
+    <!-- About Section -->
     <section id="sobre" class="section fade-in">
         <h2 class="section-title" data-translate="about-title">Sobre Mim</h2>
         <div class="about-grid">
             <div class="about-content">
                 <div class="about-text">
-                    <p data-translate="about-p1">Profissional de vendas que descobriu a paixão por programação em 2020 através dos mercados de criptomoedas, onde comecei criando sistemas de alerta de negociação com Python.</p>
-                    <p data-translate="about-p2">Após me mudar para Florianópolis, enfrentei desafios práticos no surf - agendar aulas e transportar minha prancha sem carro. Essas frustrações me inspiraram a criar o SurfHunter, hoje o aplicativo de surf que mais cresce no Brasil.</p>
-                    <p data-translate="about-p3">Atualmente, dedico-me ao desenvolvimento do SurfHunter enquanto ofereço serviços de automação e integração para clientes selecionados, combinando expertise em vendas com habilidades técnicas para criar produtos intuitivos.</p>
-                    <p data-translate="about-p4">No meu tempo livre, gosto de estar ao ar livre com meu cachorro, CrossFit, surf, leitura e passar tempo com amigos. Amo malhar e criar software - ambas atividades me desafiam a melhorar constantemente e construir algo melhor.</p>
+                    <p data-translate="about-p1">Sou um especialista em IA que enxerga possibilidades que outros nem imaginam. Enquanto a maioria está descobrindo o ChatGPT, eu construo servidores MCP customizados, orquestro fluxos de trabalho multi-agentes e crio sistemas de IA que multiplicam a produtividade em 10x. Minha jornada de vendas para programação através de sistemas de trading cripto me ensinou a identificar ineficiências e automatizá-las.</p>
+                    <p data-translate="about-p2">Hoje construo a infraestrutura de IA do futuro - do SurfHunter (o app de surf que mais cresce no Brasil com 5k+ usuários) a soluções empresariais de IA que reduzem trabalho manual em 90%. Não apenas uso ferramentas de IA; eu projeto sistemas que transformam como negócios operam. A maioria toca a ponta do iceberg - eu mergulho fundo para aproveitar todo o potencial da IA.</p>
                 </div>
             </div>
             <div class="stats">
                 <div class="stat-card">
-                    <div class="stat-number">5+</div>
-                    <div class="stat-label" data-translate="stat-experience">Anos de Experiência</div>
+                    <h3 style="font-size: 2.5rem; color: var(--accent);">4+</h3>
+                    <p data-translate="stat-experience">Anos de Experiência</p>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">20+</div>
-                    <div class="stat-label" data-translate="stat-projects">Projetos Entregues</div>
+                    <h3 style="font-size: 2.5rem; color: var(--accent);">20+</h3>
+                    <p data-translate="stat-projects">Projetos Entregues</p>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">10k+</div>
-                    <div class="stat-label" data-translate="stat-users">Usuários Ativos</div>
+                    <h3 style="font-size: 2.5rem; color: var(--accent);">5k+</h3>
+                    <p data-translate="stat-users">Usuários Ativos</p>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">80%</div>
-                    <div class="stat-label" data-translate="stat-automation">Automação de Tarefas</div>
+                    <h3 style="font-size: 2.5rem; color: var(--accent);">100k+</h3>
+                    <p data-translate="stat-code">Linhas de Código</p>
                 </div>
             </div>
-        </div>
-        
-        <!-- Photos below stats -->
-        <div class="photo-gallery" style="margin-top: 50px;">
-            <div class="photo-card">
-                <img src="https://i.imgur.com/Phr4WQH.jpeg" alt="Hunter with dog in nature">
+            <div class="photo-gallery" style="grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 40px;">
+                <div class="photo-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden;">
+                    <img src="https://i.imgur.com/Phr4WQH.jpeg" alt="Hunter with dog" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <div class="photo-card" style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 20px; overflow: hidden;">
+                    <img src="https://i.imgur.com/UaTAeE0.jpeg" alt="Hunter working on laptop" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
             </div>
-            <div class="photo-card">
-                <img src="https://i.imgur.com/UaTAeE0.jpeg" alt="Hunter working on laptop">
-            </div>
-        </div>
         </div>
     </section>
     
+    <!-- Projects Section -->
     <section id="projetos" class="section fade-in">
         <h2 class="section-title" data-translate="projects-title">Projetos em Destaque</h2>
         <div class="projects-grid">
             <div class="project-card">
-                <div class="project-icon">🏄</div>
+                <div class="project-icon" style="font-size: 3rem; margin-bottom: 20px;">🧠</div>
+                <h3>AI Workflow Orchestrator</h3>
+                <p class="project-tech" style="color: var(--accent); margin-bottom: 15px;">MCP • Claude • GPT-4 • LangChain</p>
+                <p class="project-description" data-translate="project-ai-orchestrator" style="color: var(--text-secondary);">Sistema avançado de orquestração de IA que conecta múltiplos LLMs, automatiza fluxos complexos e multiplica produtividade em 10x. Enquanto outros usam ChatGPT, eu construo a infraestrutura do futuro.</p>
+            </div>
+            <div class="project-card">
+                <div class="project-icon" style="font-size: 3rem; margin-bottom: 20px;">🏄</div>
                 <h3>SurfHunter</h3>
-                <p class="project-tech">Flutter • Firebase • Google Maps API</p>
-                <p class="project-description" data-translate="project-surfhunter">Aplicativo de surf que mais cresce no Brasil, conectando surfistas a instrutores com agendamento em tempo real e soluções de transporte.</p>
+                <p class="project-tech" style="color: var(--accent); margin-bottom: 15px;">Flutter • Firebase • Google Maps API • AI</p>
+                <p class="project-description" data-translate="project-surfhunter" style="color: var(--text-secondary);">Aplicativo de surf que mais cresce no Brasil, conectando surfistas a instrutores com agendamento em tempo real e soluções de transporte.</p>
             </div>
-            
             <div class="project-card">
-                <div class="project-icon">🏭</div>
-                <h3 data-translate="project-erp-title">ERP Customizado</h3>
-                <p class="project-tech">Python • PostgreSQL • REST APIs</p>
-                <p class="project-description" data-translate="project-erp">Modernização completa de sistema ERP para indústria de plásticos, com automação de processos e monitoramento em tempo real.</p>
+                <div class="project-icon" style="font-size: 3rem; margin-bottom: 20px;">🤖</div>
+                <h3>Sales Automation MCP</h3>
+                <p class="project-tech" style="color: var(--accent); margin-bottom: 15px;">Python • MCP • CRM APIs</p>
+                <p class="project-description" data-translate="project-sales" style="color: var(--text-secondary);">Integração CRM automatizada com servidores MCP customizados, reduzindo trabalho manual em 90% e melhorando eficiência de vendas.</p>
             </div>
-            
             <div class="project-card">
-                <div class="project-icon">🤖</div>
-                <h3 data-translate="project-ai-title">Automação com IA</h3>
-                <p class="project-tech">MCP • Streak CRM • Google Workspace</p>
-                <p class="project-description" data-translate="project-ai">Integrações customizadas que conectam modelos de IA com ferramentas empresariais, reduzindo tarefas manuais em 80%.</p>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-icon">📅</div>
-                <h3>ProHora</h3>
-                <p class="project-tech">Flutter Web • Supabase • APIs Brasileiras</p>
-                <p class="project-description" data-translate="project-prohora">Plataforma de agendamento desenvolvida especificamente para o mercado brasileiro com métodos de pagamento locais.</p>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-icon">🐕</div>
-                <h3 data-translate="project-pet-title">Sistema Pet Care</h3>
-                <p class="project-tech">React • Node.js • MongoDB</p>
-                <p class="project-description" data-translate="project-pet">Plataforma completa para negócios de cuidados pet com agendamento, histórico e notificações automáticas.</p>
-            </div>
-            
-            <div class="project-card">
-                <div class="project-icon">🎓</div>
-                <h3 data-translate="project-learning-title">Plataforma de Aprendizado</h3>
-                <p class="project-tech">Python • Anki API • Algoritmos Customizados</p>
-                <p class="project-description" data-translate="project-learning">Sistema baseado em repetição espaçada para dominar conceitos técnicos de programação com maior retenção.</p>
+                <div class="project-icon" style="font-size: 3rem; margin-bottom: 20px;">🎓</div>
+                <h3>TechLearn Anki</h3>
+                <p class="project-tech" style="color: var(--accent); margin-bottom: 15px;">React • Python • LLM APIs</p>
+                <p class="project-description" data-translate="project-learning" style="color: var(--text-secondary);">Sistema baseado em repetição espaçada para dominar conceitos técnicos de programação com maior retenção.</p>
             </div>
         </div>
     </section>
     
+    <!-- Skills Section -->
     <section id="habilidades" class="section fade-in">
         <h2 class="section-title" data-translate="skills-title">Habilidades Técnicas</h2>
-        <div class="skills-container">
-            <span class="skill-tag">Flutter (Mobile & Web)</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">JavaScript/TypeScript</span>
-            <span class="skill-tag">React</span>
-            <span class="skill-tag">Node.js</span>
-            <span class="skill-tag">Firebase</span>
-            <span class="skill-tag">Supabase</span>
-            <span class="skill-tag">PostgreSQL</span>
-            <span class="skill-tag">MongoDB</span>
-            <span class="skill-tag">REST APIs</span>
-            <span class="skill-tag" data-translate="skill-mcp">Integração MCP</span>
-            <span class="skill-tag" data-translate="skill-automation">Automação</span>
-            <span class="skill-tag">Django</span>
-            <span class="skill-tag">AWS</span>
-            <span class="skill-tag">Git</span>
-            <span class="skill-tag">Docker</span>
+        <div class="skills-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 60px;">
+            <div class="skill-card">
+                <span style="font-size: 2rem;">🧠</span>
+                <div>
+                    <h4 data-translate="skill-ai-orchestration">AI Orchestration</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">LangChain, Multi-Agent Systems, RAG</p>
+                </div>
+            </div>
+            <div class="skill-card">
+                <span style="font-size: 2rem;">🤖</span>
+                <div>
+                    <h4 data-translate="skill-llm">LLM Engineering</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Claude, GPT-4, Prompt Engineering</p>
+                </div>
+            </div>
+            <div class="skill-card">
+                <span style="font-size: 2rem;">🔗</span>
+                <div>
+                    <h4 data-translate="skill-mcp">MCP Servers</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Custom Tools, AI Integration</p>
+                </div>
+            </div>
+            <div class="skill-card">
+                <span style="font-size: 2rem;">⚡</span>
+                <div>
+                    <h4 data-translate="skill-automation">AI Automation</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Workflow Automation, n8n, Make</p>
+                </div>
+            </div>
+            <div class="skill-card">
+                <span style="font-size: 2rem;">🐍</span>
+                <div>
+                    <h4>Python</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">FastAPI, LangChain, AI Libraries</p>
+                </div>
+            </div>
+            <div class="skill-card">
+                <span style="font-size: 2rem;">📱</span>
+                <div>
+                    <h4>Full Stack</h4>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">React, Flutter, Node.js</p>
+                </div>
+            </div>
         </div>
     </section>
     
+    <!-- Testimonials Section -->
     <section id="testimonials" class="section fade-in">
         <h2 class="section-title" data-translate="testimonials-title">O Que os Usuários Dizem</h2>
         <div class="testimonials-container">
-            <div class="testimonial-card active">
-                <div class="rating">⭐⭐⭐⭐⭐</div>
-                <p class="testimonial-text" data-translate="testimonial-1">Melhor app de surf que já usei! Super fácil de agendar aulas e encontrar instrutores. O sistema de transporte é genial!</p>
+            <div class="testimonial-card">
+                <div class="testimonial-stars">★★★★★</div>
+                <div class="quote-mark" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;">"</div>
+                <p class="testimonial-text" data-translate="testimonial-1" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 30px;">Melhor app de surf que já usei! Super fácil de agendar aulas e encontrar instrutores. O sistema de transporte é genial!</p>
                 <div class="testimonial-author">
-                    <h4>João Pedro</h4>
-                    <p>SurfHunter User • App Store Review</p>
+                    <h4>Maria Silva</h4>
+                    <p style="color: var(--text-secondary);">Surfista • Florianópolis</p>
                 </div>
             </div>
             <div class="testimonial-card">
-                <div class="rating">⭐⭐⭐⭐⭐</div>
-                <p class="testimonial-text" data-translate="testimonial-2">Finally an app that understands surfers! The real-time conditions and instructor matching is perfect. Changed how I surf in Floripa.</p>
+                <div class="testimonial-stars">★★★★★</div>
+                <div class="quote-mark" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;">"</div>
+                <p class="testimonial-text" data-translate="testimonial-2" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 30px;">Finally an app that understands surfers! The real-time conditions and instructor matching is perfect. Changed how I surf in Floripa.</p>
                 <div class="testimonial-author">
-                    <h4>Amanda S.</h4>
-                    <p>SurfHunter User • Google Play Review</p>
+                    <h4>John Davis</h4>
+                    <p style="color: var(--text-secondary);">Surfer • California</p>
                 </div>
             </div>
             <div class="testimonial-card">
-                <div class="rating">⭐⭐⭐⭐⭐</div>
-                <p class="testimonial-text" data-translate="testimonial-3">Como instrutor, este app revolucionou meu negócio. Agenda cheia, pagamentos automáticos, zero dor de cabeça. Obrigado!</p>
+                <div class="testimonial-stars">★★★★★</div>
+                <div class="quote-mark" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;">"</div>
+                <p class="testimonial-text" data-translate="testimonial-3" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 30px;">Como instrutor, este app revolucionou meu negócio. Agenda cheia, pagamentos automáticos, zero dor de cabeça. Obrigado!</p>
                 <div class="testimonial-author">
-                    <h4>Carlos Medeiros</h4>
-                    <p>Surf Instructor • App Store Review</p>
+                    <h4>Pedro Santos</h4>
+                    <p style="color: var(--text-secondary);">Instrutor • SurfHunter Pro</p>
                 </div>
             </div>
             <div class="testimonial-card">
-                <div class="quote-mark">"</div>
-                <p class="testimonial-text" data-translate="testimonial-4">Hunter automated our entire sales process and built a custom MCP server that integrates seamlessly with our CRM. What used to take hours now happens automatically. Game-changing work!</p>
+                <div class="testimonial-stars">★★★★★</div>
+                <div class="quote-mark" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;">"</div>
+                <p class="testimonial-text" data-translate="testimonial-4" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 30px;">Hunter automated our entire sales process and built a custom MCP server that integrates seamlessly with our CRM. What used to take hours now happens automatically. Game-changing work!</p>
                 <div class="testimonial-author">
                     <h4>Sarah Mitchell</h4>
-                    <p>Head of Sales • Apex Digital Solutions</p>
+                    <p style="color: var(--text-secondary);">Head of Sales • Apex Digital Solutions</p>
                 </div>
             </div>
             <div class="testimonial-card">
-                <div class="quote-mark">"</div>
-                <p class="testimonial-text" data-translate="testimonial-5">We needed a custom Anki solution for our engineering team to master technical concepts. Hunter delivered an intelligent spaced-repetition system that significantly improved our learning retention. Brilliant execution!</p>
+                <div class="testimonial-stars">★★★★★</div>
+                <div class="quote-mark" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;">"</div>
+                <p class="testimonial-text" data-translate="testimonial-5" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 30px;">We needed a custom Anki solution for our engineering team to master technical concepts. Hunter delivered an intelligent spaced-repetition system that significantly improved our learning retention. Brilliant execution!</p>
                 <div class="testimonial-author">
                     <h4>David Chen</h4>
-                    <p>Engineering Lead • TechEd Solutions</p>
+                    <p style="color: var(--text-secondary);">Engineering Lead • TechEd Solutions</p>
                 </div>
             </div>
             <div class="testimonial-card">
-                <div class="quote-mark">"</div>
-                <p class="testimonial-text" data-translate="testimonial-6">Melhor APP de conexão do professor e o aluno, sendo que o professor é treinado e bem capacitado para dar as aulas de surf.</p>
+                <div class="testimonial-stars">★★★★★</div>
+                <div class="quote-mark" style="font-size: 3rem; color: var(--accent); margin-bottom: 20px;">"</div>
+                <p class="testimonial-text" data-translate="testimonial-6" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 30px;">Melhor APP de conexão do professor e o aluno, sendo que o professor é treinado e bem capacitado para dar as aulas de surf.</p>
                 <div class="testimonial-author">
                     <h4>Thiago</h4>
-                    <p data-translate="testimonial-role-6">Instrutor • ProRadical</p>
+                    <p data-translate="testimonial-role-6" style="color: var(--text-secondary);">Instrutor • ProRadical</p>
                 </div>
             </div>
             <div class="testimonial-nav">
@@ -1640,6 +557,7 @@
         </div>
     </section>
     
+    <!-- GitHub Activity Section -->
     <section id="github-activity" class="section fade-in">
         <h2 class="section-title" data-translate="github-title">Atividade no GitHub</h2>
         <div class="github-container">
@@ -1653,669 +571,93 @@
                     <img src="https://github-readme-streak-stats.herokuapp.com/?user=hdbookie&theme=dark&hide_border=true&background=0D1117&ring=3b82f6&fire=3b82f6&currStreakLabel=3b82f6" alt="GitHub Streak" style="width: 100%;" />
                 </div>
             </div>
-            <div class="recent-repos" id="recentRepos">
-                <h3 data-translate="github-recent">Projetos Recentes</h3>
-                <div class="repos-grid" id="reposGrid">
+            <div class="recent-repos" id="recentRepos" style="margin-top: 40px;">
+                <h3 data-translate="github-recent" style="font-size: 1.5rem; margin-bottom: 20px;">Projetos Recentes</h3>
+                <div class="repos-grid" id="reposGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
                     <!-- Repos will be loaded here -->
                 </div>
             </div>
         </div>
     </section>
     
+    <!-- Contact Section -->
     <section id="contato" class="section fade-in">
         <h2 class="section-title" data-translate="contact-title">Vamos Trabalhar Juntos</h2>
-        <div class="contact-container">
-            <p style="font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 50px;">
-                <span data-translate="contact-subtitle">Especializado em criar soluções de software que resolvem problemas reais.<br>
-                Disponível para aplicações customizadas, projetos de automação e modernização de sistemas.</span>
-            </p>
-            
-            <div class="contact-grid">
-                <a href="mailto:hdbooks15@gmail.com" class="contact-card-link">
-                    <div class="contact-card">
-                        <div class="contact-icon">📧</div>
-                        <h4>Email</h4>
-                        <span>hdbooks15@gmail.com</span>
-                    </div>
-                </a>
-                <a href="https://www.linkedin.com/in/hunter-books-6a070467/" target="_blank" class="contact-card-link">
-                    <div class="contact-card">
-                        <div class="contact-icon">💼</div>
-                        <h4>LinkedIn</h4>
-                        <span>/in/hunter-books</span>
-                    </div>
-                </a>
-                <a href="https://www.instagram.com/hunterbooks_/" target="_blank" class="contact-card-link">
-                    <div class="contact-card">
-                        <div class="contact-icon">📷</div>
-                        <h4>Instagram</h4>
-                        <span>@hunterbooks_</span>
-                    </div>
-                </a>
-                <a href="https://wa.me/16512397167" target="_blank" class="contact-card-link">
-                    <div class="contact-card">
-                        <div class="contact-icon">💬</div>
-                        <h4>WhatsApp</h4>
-                        <span>+1 (651) 239-7167</span>
-                    </div>
-                </a>
-                <a href="https://github.com/hdbookie" target="_blank" class="contact-card-link">
-                    <div class="contact-card">
-                        <div class="contact-icon">🐙</div>
-                        <h4>GitHub</h4>
-                        <span>@hdbookie</span>
-                    </div>
-                </a>
-            </div>
-            
+        <p style="text-align: center; color: var(--text-secondary); max-width: 600px; margin: 0 auto 60px;" data-translate="contact-subtitle">
+            Especializado em criar soluções de software que resolvem problemas reais.<br>Disponível para aplicações customizadas, projetos de automação e modernização de sistemas.
+        </p>
+        <div class="contact-grid">
+            <a href="https://github.com/hdbookie" target="_blank" class="contact-card">
+                <div class="contact-icon" style="font-size: 2.5rem; margin-bottom: 15px;">💻</div>
+                <h3>GitHub</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">@hdbookie</p>
+            </a>
+            <a href="https://www.linkedin.com/in/hunter-books-6a070467/" target="_blank" class="contact-card">
+                <div class="contact-icon" style="font-size: 2.5rem; margin-bottom: 15px;">💼</div>
+                <h3>LinkedIn</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Hunter Books</p>
+            </a>
+            <a href="https://www.instagram.com/hunterbooks_/" target="_blank" class="contact-card">
+                <div class="contact-icon" style="font-size: 2.5rem; margin-bottom: 15px;">📸</div>
+                <h3>Instagram</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">@hunterbooks_</p>
+            </a>
+            <a href="https://wa.me/16512397167" target="_blank" class="contact-card">
+                <div class="contact-icon" style="font-size: 2.5rem; margin-bottom: 15px;">💬</div>
+                <h3>WhatsApp</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">+1 (651) 239-7167</p>
+            </a>
+            <a href="mailto:hdbooks15@gmail.com" class="contact-card">
+                <div class="contact-icon" style="font-size: 2.5rem; margin-bottom: 15px;">✉️</div>
+                <h3>Email</h3>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">hdbooks15@gmail.com</p>
+            </a>
         </div>
     </section>
     
-    <footer>
-        <p>&copy; 2025 Hunter. <span data-translate="footer">Feito com ❤️ em Florianópolis</span></p>
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 50px 20px; color: var(--text-secondary);">
+        <p data-translate="footer">Feito com ❤️ em Florianópolis</p>
+        <p style="margin-top: 10px; font-size: 0.8rem;">© 2024 Hunter Books</p>
     </footer>
     
     <!-- Scroll to top button -->
     <button class="scroll-top" id="scrollTop">↑</button>
     
+    <!-- JavaScript Files -->
+    <script src="assets/js/translations.js"></script>
+    <script src="assets/js/animations.js"></script>
+    <script src="assets/js/terminal.js"></script>
+    <script src="assets/js/testimonials.js"></script>
+    <script src="assets/js/main.js"></script>
+    
     <script>
-        // Translations
-        const translations = {
-            en: {
-                'nav-about': 'About',
-                'nav-projects': 'Projects',
-                'nav-skills': 'Skills',
-                'nav-contact': 'Contact',
-                'hero-title-1': 'I transform ideas into',
-                'hero-title-2': 'digital solutions',
-                'hero-subtitle': 'Full Stack Developer specialized in automation and system integration',
-                'hero-cta-projects': 'View Projects',
-                'hero-cta-contact': 'Get in Touch',
-                'about-title': 'About Me',
-                'about-p1': 'Sales professional who discovered a passion for programming in 2020 through cryptocurrency markets, where I started creating trade alert systems with Python.',
-                'about-p2': 'After moving to Florianópolis, I faced practical surfing challenges - booking lessons and transporting my board without a car. These frustrations inspired me to create SurfHunter, now Brazil\'s fastest-growing surf application.',
-                'about-p3': 'I\'m currently dedicated to developing and growing SurfHunter while providing automation and integration services to select clients, combining sales expertise with technical skills to create intuitive products.',
-                'about-p4': 'In my spare time, I enjoy being outside with my dog, CrossFit, surfing, reading, and spending time with friends. I love working out and creating software - both activities that challenge me to constantly improve and build something better.',
-                'stat-experience': 'Years of Experience',
-                'stat-projects': 'Projects Delivered',
-                'stat-users': 'Active Users',
-                'stat-automation': 'Task Automation',
-                'projects-title': 'Featured Projects',
-                'project-surfhunter': 'Brazil\'s fastest-growing surf app, connecting surfers with instructors with real-time scheduling and transportation solutions.',
-                'project-erp-title': 'Custom ERP',
-                'project-erp': 'Complete ERP system modernization for plastics industry, with process automation and real-time monitoring.',
-                'project-ai-title': 'AI Automation',
-                'project-ai': 'Custom integrations that connect AI models with business tools, reducing manual tasks by 80%.',
-                'project-prohora': 'Scheduling platform developed specifically for the Brazilian market with local payment methods.',
-                'project-pet-title': 'Pet Care System',
-                'project-pet': 'Complete platform for pet care businesses with scheduling, history, and automatic notifications.',
-                'project-learning-title': 'Learning Platform',
-                'project-learning': 'Spaced repetition system for mastering technical programming concepts with improved retention.',
-                'skills-title': 'Technical Skills',
-                'skill-mcp': 'MCP Integration',
-                'skill-automation': 'Automation',
-                'contact-title': 'Let\'s Work Together',
-                'contact-subtitle': 'Specialized in creating software solutions that solve real problems.<br>Available for custom applications, automation projects, and system modernization.',
-                'footer': 'Made with ❤️ in Florianópolis',
-                'testimonials-title': 'What Users Say',
-                'github-title': 'GitHub Activity',
-                'github-contribution': 'Contribution Activity',
-                'github-recent': 'Recent Projects',
-                'testimonial-1': 'Best surf app I\'ve ever used! Super easy to book lessons and find instructors. The transport system is genius!',
-                'testimonial-2': 'Finally an app that understands surfers! The real-time conditions and instructor matching is perfect. Changed how I surf in Floripa.',
-                'testimonial-3': 'As an instructor, this app revolutionized my business. Full schedule, automatic payments, zero headache. Thank you!',
-                'testimonial-4': 'Hunter automated our entire sales process and built a custom MCP server that integrates seamlessly with our CRM. What used to take hours now happens automatically. Game-changing work!',
-                'testimonial-5': 'We needed a custom Anki solution for our engineering team to master technical concepts. Hunter delivered an intelligent spaced-repetition system that significantly improved our learning retention. Brilliant execution!',
-                'testimonial-6': 'Best APP for connecting teachers and students, with trained and well-qualified instructors to teach surf lessons.',
-                'testimonial-role-6': 'Instructor • ProRadical'
-            },
-            es: {
-                'nav-about': 'Acerca',
-                'nav-projects': 'Proyectos',
-                'nav-skills': 'Habilidades',
-                'nav-contact': 'Contacto',
-                'hero-title-1': 'Transformo ideas en',
-                'hero-title-2': 'soluciones digitales',
-                'hero-subtitle': 'Desarrollador Full Stack especializado en automatización e integración de sistemas',
-                'hero-cta-projects': 'Ver Proyectos',
-                'hero-cta-contact': 'Contactar',
-                'about-title': 'Sobre Mí',
-                'about-p1': 'Profesional de ventas que descubrió la pasión por la programación en 2020 a través de los mercados de criptomonedas, donde comencé creando sistemas de alerta de trading con Python.',
-                'about-p2': 'Después de mudarme a Florianópolis, enfrenté desafíos prácticos en el surf: reservar clases y transportar mi tabla sin auto. Estas frustraciones me inspiraron a crear SurfHunter, ahora la aplicación de surf de mayor crecimiento en Brasil.',
-                'about-p3': 'Actualmente me dedico al desarrollo de SurfHunter mientras ofrezco servicios de automatización e integración para clientes selectos, combinando experiencia en ventas con habilidades técnicas para crear productos intuitivos.',
-                'about-p4': 'En mi tiempo libre, disfruto estar al aire libre con mi perro, CrossFit, surf, lectura y pasar tiempo con amigos. Me encanta entrenar y crear software: ambas actividades me desafían a mejorar constantemente y construir algo mejor.',
-                'stat-experience': 'Años de Experiencia',
-                'stat-projects': 'Proyectos Entregados',
-                'stat-users': 'Usuarios Activos',
-                'stat-automation': 'Automatización de Tareas',
-                'projects-title': 'Proyectos Destacados',
-                'project-surfhunter': 'La aplicación de surf de mayor crecimiento en Brasil, conectando surfistas con instructores con programación en tiempo real y soluciones de transporte.',
-                'project-erp-title': 'ERP Personalizado',
-                'project-erp': 'Modernización completa del sistema ERP para la industria del plástico, con automatización de procesos y monitoreo en tiempo real.',
-                'project-ai-title': 'Automatización con IA',
-                'project-ai': 'Integraciones personalizadas que conectan modelos de IA con herramientas empresariales, reduciendo tareas manuales en un 80%.',
-                'project-prohora': 'Plataforma de programación desarrollada específicamente para el mercado brasileño con métodos de pago locales.',
-                'project-pet-title': 'Sistema Pet Care',
-                'project-pet': 'Plataforma completa para negocios de cuidado de mascotas con programación, historial y notificaciones automáticas.',
-                'project-learning-title': 'Plataforma de Aprendizaje',
-                'project-learning': 'Sistema basado en repetición espaciada para dominar conceptos técnicos de programación con mayor retención.',
-                'skills-title': 'Habilidades Técnicas',
-                'skill-mcp': 'Integración MCP',
-                'skill-automation': 'Automatización',
-                'contact-title': 'Trabajemos Juntos',
-                'contact-subtitle': 'Especializado en crear soluciones de software que resuelven problemas reales.<br>Disponible para aplicaciones personalizadas, proyectos de automatización y modernización de sistemas.',
-                'footer': 'Hecho con ❤️ en Florianópolis',
-                'testimonials-title': 'Lo Que Dicen los Usuarios',
-                'github-title': 'Actividad en GitHub',
-                'github-contribution': 'Actividad de Contribuciones',
-                'github-recent': 'Proyectos Recientes',
-                'testimonial-1': '¡La mejor app de surf que he usado! Súper fácil reservar clases y encontrar instructores. ¡El sistema de transporte es genial!',
-                'testimonial-2': 'Finally an app that understands surfers! The real-time conditions and instructor matching is perfect. Changed how I surf in Floripa.',
-                'testimonial-3': 'Como instructor, esta app revolucionó mi negocio. Agenda llena, pagos automáticos, cero dolor de cabeza. ¡Gracias!',
-                'testimonial-4': 'Hunter automatizó todo nuestro proceso de ventas y construyó un servidor MCP personalizado que se integra perfectamente con nuestro CRM. Lo que solía tomar horas ahora sucede automáticamente. ¡Trabajo revolucionario!',
-                'testimonial-5': 'Necesitábamos una solución Anki personalizada para que nuestro equipo de ingeniería dominara conceptos técnicos. Hunter entregó un sistema inteligente de repetición espaciada que mejoró significativamente nuestra retención. ¡Ejecución brillante!',
-                'testimonial-6': 'La mejor APP de conexión entre profesor y alumno, con profesores entrenados y bien capacitados para dar clases de surf.',
-                'testimonial-role-6': 'Instructor • ProRadical'
-            },
-            pt: {
-                'nav-about': 'Sobre',
-                'nav-projects': 'Projetos',
-                'nav-skills': 'Habilidades',
-                'nav-contact': 'Contato',
-                'hero-title-1': 'Transformo ideias em',
-                'hero-title-2': 'soluções digitais',
-                'hero-subtitle': 'Desenvolvedor Full Stack especializado em automação e integração de sistemas',
-                'hero-cta-projects': 'Ver Projetos',
-                'hero-cta-contact': 'Entrar em Contato',
-                'about-title': 'Sobre Mim',
-                'about-p1': 'Profissional de vendas que descobriu a paixão por programação em 2020 através dos mercados de criptomoedas, onde comecei criando sistemas de alerta de negociação com Python.',
-                'about-p2': 'Após me mudar para Florianópolis, enfrentei desafios práticos no surf - agendar aulas e transportar minha prancha sem carro. Essas frustrações me inspiraram a criar o SurfHunter, hoje o aplicativo de surf que mais cresce no Brasil.',
-                'about-p3': 'Atualmente, dedico-me ao desenvolvimento do SurfHunter enquanto ofereço serviços de automação e integração para clientes selecionados, combinando expertise em vendas com habilidades técnicas para criar produtos intuitivos.',
-                'about-p4': 'No meu tempo livre, gosto de estar ao ar livre com meu cachorro, CrossFit, surf, leitura e passar tempo com amigos. Amo malhar e criar software - ambas atividades me desafiam a melhorar constantemente e construir algo melhor.',
-                'stat-experience': 'Anos de Experiência',
-                'stat-projects': 'Projetos Entregues',
-                'stat-users': 'Usuários Ativos',
-                'stat-automation': 'Automação de Tarefas',
-                'projects-title': 'Projetos em Destaque',
-                'project-surfhunter': 'Aplicativo de surf que mais cresce no Brasil, conectando surfistas a instrutores com agendamento em tempo real e soluções de transporte.',
-                'project-erp-title': 'ERP Customizado',
-                'project-erp': 'Modernização completa de sistema ERP para indústria de plásticos, com automação de processos e monitoramento em tempo real.',
-                'project-ai-title': 'Automação com IA',
-                'project-ai': 'Integrações customizadas que conectam modelos de IA com ferramentas empresariais, reduzindo tarefas manuais em 80%.',
-                'project-prohora': 'Plataforma de agendamento desenvolvida especificamente para o mercado brasileiro com métodos de pagamento locais.',
-                'project-pet-title': 'Sistema Pet Care',
-                'project-pet': 'Plataforma completa para negócios de cuidados pet com agendamento, histórico e notificações automáticas.',
-                'project-learning-title': 'Plataforma de Aprendizado',
-                'project-learning': 'Sistema baseado em repetição espaçada para dominar conceitos técnicos de programação com maior retenção.',
-                'skills-title': 'Habilidades Técnicas',
-                'skill-mcp': 'Integração MCP',
-                'skill-automation': 'Automação',
-                'contact-title': 'Vamos Trabalhar Juntos',
-                'contact-subtitle': 'Especializado em criar soluções de software que resolvem problemas reais.<br>Disponível para aplicações customizadas, projetos de automação e modernização de sistemas.',
-                'footer': 'Feito com ❤️ em Florianópolis',
-                'testimonials-title': 'O Que os Usuários Dizem',
-                'github-title': 'Atividade no GitHub',
-                'github-contribution': 'Atividade de Contribuições',
-                'github-recent': 'Projetos Recentes',
-                'testimonial-1': 'Melhor app de surf que já usei! Super fácil de agendar aulas e encontrar instrutores. O sistema de transporte é genial!',
-                'testimonial-2': 'Finally an app that understands surfers! The real-time conditions and instructor matching is perfect. Changed how I surf in Floripa.',
-                'testimonial-3': 'Como instrutor, este app revolucionou meu negócio. Agenda cheia, pagamentos automáticos, zero dor de cabeça. Obrigado!',
-                'testimonial-4': 'Hunter automatizou todo nosso processo de vendas e construiu um servidor MCP customizado que se integra perfeitamente com nosso CRM. O que levava horas agora acontece automaticamente. Trabalho revolucionário!',
-                'testimonial-5': 'Precisávamos de uma solução Anki customizada para nossa equipe de engenharia dominar conceitos técnicos. Hunter entregou um sistema inteligente de repetição espaçada que melhorou significativamente nossa retenção. Execução brilhante!',
-                'testimonial-6': 'Melhor APP de conexão do professor e o aluno, sendo que o professor é treinado e bem capacitado para dar as aulas de surf.',
-                'testimonial-role-6': 'Instrutor • ProRadical'
-            }
-        };
-        
-        // Detect user's preferred language
-        function detectUserLanguage() {
-            const browserLang = navigator.language || navigator.userLanguage;
-            const langCode = browserLang.toLowerCase();
+        // GitHub Activity - Keep inline for now as it needs refactoring
+        function fetchGitHubActivity() {
+            const reposGrid = document.getElementById('reposGrid');
             
-            if (langCode.startsWith('pt')) {
-                return 'pt';
-            } else if (langCode.startsWith('es')) {
-                return 'es';
-            } else {
-                return 'en'; // default to English
-            }
+            fetch('https://api.github.com/users/hdbookie/repos?sort=updated&per_page=6')
+                .then(response => response.json())
+                .then(repos => {
+                    reposGrid.innerHTML = repos.map(repo => `
+                        <a href="${repo.html_url}" target="_blank" class="project-card" style="text-decoration: none; color: inherit;">
+                            <h4>${repo.name}</h4>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 10px 0;">
+                                ${repo.description || 'No description available'}
+                            </p>
+                            <div style="display: flex; gap: 20px; font-size: 0.85rem; color: var(--text-secondary);">
+                                <span>⭐ ${repo.stargazers_count}</span>
+                                <span>🔀 ${repo.forks_count}</span>
+                                ${repo.language ? `<span>• ${repo.language}</span>` : ''}
+                            </div>
+                        </a>
+                    `).join('');
+                })
+                .catch(error => {
+                    console.error('Error fetching GitHub activity:', error);
+                    reposGrid.innerHTML = '<p style="color: var(--text-secondary);">Unable to load GitHub activity</p>';
+                });
         }
-        
-        // Language switching
-        let currentLang = detectUserLanguage();
-        
-        function switchLanguage(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-translate]').forEach(element => {
-                const key = element.getAttribute('data-translate');
-                if (translations[lang] && translations[lang][key]) {
-                    element.innerHTML = translations[lang][key];
-                }
-            });
-            
-            // Update active language button
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.getAttribute('data-lang') === lang) {
-                    btn.classList.add('active');
-                }
-            });
-            
-            // Update HTML lang attribute
-            document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
-            
-            // Save preference
-            localStorage.setItem('preferred-language', lang);
-        }
-        
-        // Load saved language preference or use detected language
-        function initializeLanguage() {
-            const savedLang = localStorage.getItem('preferred-language');
-            const initialLang = savedLang || currentLang;
-            switchLanguage(initialLang);
-        }
-        
-        // Language button click handlers
-        document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                switchLanguage(btn.getAttribute('data-lang'));
-            });
-        });
-        
-        // Mobile menu functionality
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileNav = document.getElementById('mobileNav');
-        const closeMobileMenu = document.getElementById('closeMobileMenu');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileNav.classList.add('active');
-        });
-        
-        closeMobileMenu.addEventListener('click', () => {
-            mobileNav.classList.remove('active');
-        });
-        
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.mobile-nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileNav.classList.remove('active');
-            });
-        });
-        
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-        
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-        
-        // Parallax effect
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const bgAnimation = document.querySelector('.bg-animation');
-            if (bgAnimation) {
-                bgAnimation.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-        });
-        
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-        
-        // Observe all fade-in elements
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-        
-        // Scroll to top button
-        const scrollTopBtn = document.getElementById('scrollTop');
-        
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollTopBtn.classList.add('visible');
-            } else {
-                scrollTopBtn.classList.remove('visible');
-            }
-        });
-        
-        scrollTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        
-        // Typing effect for hero title (optional enhancement)
-        function typeWriter(element, text, speed = 100) {
-            let i = 0;
-            element.innerHTML = '';
-            
-            function type() {
-                if (i < text.length) {
-                    element.innerHTML += text.charAt(i);
-                    i++;
-                    setTimeout(type, speed);
-                }
-            }
-            
-            type();
-        }
-        
-        // Create particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 15;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 20 + 's';
-                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-        
-        // Create code rain
-        function createCodeRain() {
-            const codeRainContainer = document.getElementById('codeRain');
-            const codeSnippets = [
-                'const hello = "world";',
-                'function build() {',
-                'import React from "react";',
-                'git commit -m "feat:"',
-                'npm install',
-                'docker run -p 3000:3000',
-                'SELECT * FROM users;',
-                'flutter create app',
-                'python manage.py runserver',
-                'export API_KEY=',
-                'cd ~/projects',
-                'yarn build',
-                'firebase deploy',
-                'supabase gen types',
-                'npm run dev'
-            ];
-            
-            function createCodeLine() {
-                const codeLine = document.createElement('div');
-                codeLine.className = 'code-line';
-                codeLine.textContent = codeSnippets[Math.floor(Math.random() * codeSnippets.length)];
-                codeLine.style.left = Math.random() * 100 + '%';
-                codeLine.style.animationDelay = Math.random() * 5 + 's';
-                codeLine.style.animationDuration = (10 + Math.random() * 10) + 's';
-                codeRainContainer.appendChild(codeLine);
-                
-                // Remove after animation
-                setTimeout(() => {
-                    if (codeLine.parentNode) {
-                        codeLine.parentNode.removeChild(codeLine);
-                    }
-                }, 20000);
-            }
-            
-            // Create initial code lines
-            for (let i = 0; i < 8; i++) {
-                setTimeout(() => createCodeLine(), i * 2000);
-            }
-            
-            // Continue creating code lines
-            setInterval(createCodeLine, 3000);
-        }
-        
-        // Cursor trail effect
-        function createCursorTrail() {
-            const trail = [];
-            const trailLength = 10;
-            
-            document.addEventListener('mousemove', (e) => {
-                const trailElement = document.createElement('div');
-                trailElement.style.position = 'fixed';
-                trailElement.style.width = '4px';
-                trailElement.style.height = '4px';
-                trailElement.style.background = 'var(--accent)';
-                trailElement.style.borderRadius = '50%';
-                trailElement.style.pointerEvents = 'none';
-                trailElement.style.zIndex = '9999';
-                trailElement.style.left = e.clientX + 'px';
-                trailElement.style.top = e.clientY + 'px';
-                trailElement.style.opacity = '0.6';
-                trailElement.style.transition = 'opacity 0.5s ease-out';
-                
-                document.body.appendChild(trailElement);
-                
-                trail.push(trailElement);
-                
-                if (trail.length > trailLength) {
-                    const oldElement = trail.shift();
-                    if (oldElement.parentNode) {
-                        oldElement.parentNode.removeChild(oldElement);
-                    }
-                }
-                
-                setTimeout(() => {
-                    trailElement.style.opacity = '0';
-                    setTimeout(() => {
-                        if (trailElement.parentNode) {
-                            trailElement.parentNode.removeChild(trailElement);
-                        }
-                    }, 500);
-                }, 100);
-            });
-        }
-        
-        // Terminal typing animation
-        function typeTerminal() {
-            const commands = [
-                "whoami",
-                "hunter.books",
-                "cat skills.txt",
-                "Flutter • Python • React • Node.js",
-                "git status",
-                "✓ SurfHunter deployed",
-                "✓ 10,000+ active users",
-                "./launch_portfolio.sh"
-            ];
-            
-            const terminalText = document.getElementById('terminalText');
-            let commandIndex = 0;
-            let charIndex = 0;
-            let isDeleting = false;
-            let isPaused = false;
-            
-            function type() {
-                if (commandIndex >= commands.length) {
-                    commandIndex = 0;
-                }
-                
-                const currentCommand = commands[commandIndex];
-                
-                if (!isDeleting && charIndex < currentCommand.length) {
-                    terminalText.textContent += currentCommand.charAt(charIndex);
-                    charIndex++;
-                    setTimeout(type, 100);
-                } else if (isDeleting && charIndex > 0) {
-                    terminalText.textContent = currentCommand.substring(0, charIndex - 1);
-                    charIndex--;
-                    setTimeout(type, 50);
-                } else if (!isDeleting && charIndex === currentCommand.length && !isPaused) {
-                    isPaused = true;
-                    setTimeout(() => {
-                        isPaused = false;
-                        isDeleting = true;
-                        type();
-                    }, 2000);
-                } else if (isDeleting && charIndex === 0) {
-                    isDeleting = false;
-                    commandIndex++;
-                    setTimeout(type, 500);
-                }
-            }
-            
-            setTimeout(() => {
-                type();
-            }, 1000);
-        }
-        
-        // Fetch GitHub Activity
-        async function fetchGitHubActivity() {
-            const username = 'hdbookie';
-            
-            try {
-                // No need to fetch user data anymore since we removed the stats
-                
-                // Fetch recent repos
-                const reposResponse = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=6`);
-                const repos = await reposResponse.json();
-                
-                // Display repos
-                const reposGrid = document.getElementById('reposGrid');
-                reposGrid.innerHTML = repos.map(repo => `
-                    <a href="${repo.html_url}" target="_blank" class="repo-card">
-                        <div class="repo-header">
-                            <span class="repo-name">${repo.name}</span>
-                        </div>
-                        <p class="repo-description">${repo.description || 'No description available'}</p>
-                        <div class="repo-stats">
-                            <span class="repo-stat">⭐ ${repo.stargazers_count}</span>
-                            <span class="repo-stat">🍴 ${repo.forks_count}</span>
-                            <span class="repo-stat">📅 ${new Date(repo.updated_at).toLocaleDateString()}</span>
-                        </div>
-                    </a>
-                `).join('');
-                
-                // Use GitHub Stats Card and Activity Graph
-                document.getElementById('githubCalendar').innerHTML = `
-                    <div style="text-align: center; display: flex; flex-direction: column; gap: 20px;">
-                        <img src="https://github-readme-stats.vercel.app/api?username=${username}&show_icons=true&theme=dark&hide_border=true&bg_color=0a0a0a&text_color=ffffff&title_color=3b82f6&icon_color=3b82f6" alt="GitHub Stats" style="max-width: 100%;">
-                        <img src="https://github-readme-activity-graph.vercel.app/graph?username=${username}&theme=react-dark&bg_color=0a0a0a&color=ffffff&line=3b82f6&point=3b82f6&hide_border=true" alt="Contribution Graph" style="max-width: 100%;">
-                    </div>
-                `;
-                
-                // Fetch contribution data from GitHub GraphQL API (public data)
-                // For now, we'll use the stats from the profile
-                const eventsResponse = await fetch(`https://api.github.com/users/${username}/events/public`);
-                const events = await eventsResponse.json();
-                
-                // Count recent contributions (rough estimate based on recent events)
-                const recentContributions = events.filter(event => {
-                    const eventDate = new Date(event.created_at);
-                    const daysDiff = (new Date() - eventDate) / (1000 * 60 * 60 * 24);
-                    return daysDiff <= 365;
-                }).length;
-                
-                // Calculate streak (simplified - counts consecutive days with events)
-                const today = new Date();
-                let streak = 0;
-                let currentDate = new Date(today);
-                
-                for (let i = 0; i < 30; i++) {
-                    const dateStr = currentDate.toISOString().split('T')[0];
-                    const hasActivity = events.some(event => 
-                        event.created_at.startsWith(dateStr)
-                    );
-                    
-                    if (hasActivity) {
-                        streak++;
-                    } else if (streak > 0) {
-                        break;
-                    }
-                    
-                    currentDate.setDate(currentDate.getDate() - 1);
-                }
-                
-                document.getElementById('totalContributions').textContent = `${recentContributions}+`;
-                document.getElementById('currentStreak').textContent = streak || '0';
-                
-            } catch (error) {
-                console.error('Error fetching GitHub data:', error);
-                document.getElementById('githubCalendar').innerHTML = '<p>Unable to load GitHub activity</p>';
-            }
-        }
-        
-        // Testimonial Carousel
-        let currentTestimonialIndex = 1;
-        
-        function changeTestimonial(direction) {
-            const testimonials = document.querySelectorAll('.testimonial-card');
-            const dots = document.querySelectorAll('.dot');
-            
-            testimonials[currentTestimonialIndex - 1].classList.remove('active');
-            dots[currentTestimonialIndex - 1].classList.remove('active');
-            
-            currentTestimonialIndex += direction;
-            
-            if (currentTestimonialIndex > testimonials.length) {
-                currentTestimonialIndex = 1;
-            } else if (currentTestimonialIndex < 1) {
-                currentTestimonialIndex = testimonials.length;
-            }
-            
-            testimonials[currentTestimonialIndex - 1].classList.add('active');
-            dots[currentTestimonialIndex - 1].classList.add('active');
-        }
-        
-        function currentTestimonial(index) {
-            const testimonials = document.querySelectorAll('.testimonial-card');
-            const dots = document.querySelectorAll('.dot');
-            
-            testimonials[currentTestimonialIndex - 1].classList.remove('active');
-            dots[currentTestimonialIndex - 1].classList.remove('active');
-            
-            currentTestimonialIndex = index;
-            
-            testimonials[currentTestimonialIndex - 1].classList.add('active');
-            dots[currentTestimonialIndex - 1].classList.add('active');
-        }
-        
-        // Auto-rotate testimonials
-        setInterval(() => {
-            changeTestimonial(1);
-        }, 5000);
-        
-        // Initialize animations on page load
-        window.addEventListener('load', () => {
-            // Hide loading screen after a short delay
-            setTimeout(() => {
-                document.getElementById('loadingScreen').classList.add('hide');
-            }, 1500);
-            
-            initializeLanguage();
-            createParticles();
-            createCodeRain();
-            createCursorTrail();
-            typeTerminal();
-            fetchGitHubActivity();
-            console.log('Portfolio loaded successfully!');
-        });
     </script>
 </body>
 </html>
