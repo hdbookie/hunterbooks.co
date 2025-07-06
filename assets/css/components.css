@@ -241,6 +241,12 @@
     color: inherit;
     display: block;
     cursor: pointer;
+    overflow: hidden;
+}
+
+.contact-card p {
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .contact-card:hover {
@@ -289,5 +295,16 @@
         width: 100%;
         max-width: 250px;
         justify-content: center;
+    }
+}
+
+/* Mobile adjustments for contact cards */
+@media (max-width: 768px) {
+    .contact-card {
+        padding: 20px 15px;
+    }
+    
+    .contact-card p {
+        font-size: 0.85rem !important;
     }
 }
