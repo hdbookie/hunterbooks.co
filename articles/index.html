@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles - Hunter Books</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/animations.css">
+    <link rel="stylesheet" href="../assets/css/articles.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader">
+            <div class="loader-circle"></div>
+            <p class="loader-text">Carregando...</p>
+        </div>
+    </div>
+
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+    <div class="noise"></div>
+    <div id="particles"></div>
+
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="pt">PT</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="es">ES</button>
+    </div>
+    
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-content">
+            <div class="logo"><a href="/" style="color: inherit; text-decoration: none;">HunterBooks.co</a></div>
+            <ul class="nav-links">
+                <li><a href="/#sobre" data-translate="nav-about">Sobre</a></li>
+                <li><a href="/#projetos" data-translate="nav-projects">Projetos</a></li>
+                <li><a href="/#habilidades" data-translate="nav-skills">Habilidades</a></li>
+                <li><a href="/articles" class="active" data-translate="nav-articles">Artigos</a></li>
+                <li><a href="/#contato" data-translate="nav-contact">Contato</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+        </div>
+    </nav>
+    
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <button class="close-mobile-menu" id="closeMobileMenu">×</button>
+        <a href="/#sobre" data-translate="nav-about">Sobre</a>
+        <a href="/#projetos" data-translate="nav-projects">Projetos</a>
+        <a href="/#habilidades" data-translate="nav-skills">Habilidades</a>
+        <a href="/articles" data-translate="nav-articles">Artigos</a>
+        <a href="/#contato" data-translate="nav-contact">Contato</a>
+    </div>
+    
+    <!-- Articles Hero -->
+    <section class="articles-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span data-translate="articles-hero-title">Pensamentos &</span>
+                <span class="gradient-text" data-translate="articles-hero-subtitle">Aprendizados</span>
+            </h1>
+            <p class="hero-subtitle" data-translate="articles-hero-description">
+                Compartilhando conhecimento sobre desenvolvimento, automação e empreendedorismo
+            </p>
+        </div>
+    </section>
+    
+    <!-- Filter Tags -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-tags">
+                <button class="filter-tag active" data-filter="all" data-translate="filter-all">Todos</button>
+                <button class="filter-tag" data-filter="development" data-translate="filter-development">Desenvolvimento</button>
+                <button class="filter-tag" data-filter="automation" data-translate="filter-automation">Automação</button>
+                <button class="filter-tag" data-filter="business" data-translate="filter-business">Negócios</button>
+                <button class="filter-tag" data-filter="tutorial" data-translate="filter-tutorial">Tutorial</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Articles Grid -->
+    <section class="articles-section">
+        <div class="container">
+            <div class="articles-grid" id="articlesGrid">
+                <!-- Articles will be loaded here dynamically -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 50px 20px; color: var(--text-secondary);">
+        <p data-translate="footer">Feito com ❤️ em Florianópolis</p>
+        <p style="margin-top: 10px; font-size: 0.8rem;">© 2024 Hunter Books</p>
+    </footer>
+    
+    <!-- Scroll to top button -->
+    <button class="scroll-top" id="scrollTop">↑</button>
+    
+    <!-- JavaScript Files -->
+    <script src="../assets/js/translations.js"></script>
+    <script src="../assets/js/animations.js"></script>
+    <script src="../assets/js/articles.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
