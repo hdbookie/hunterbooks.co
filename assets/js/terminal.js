@@ -8,15 +8,15 @@ function typeTerminal() {
     
     const commands = [
         { prompt: '$', text: 'whoami', delay: 100 },
-        { prompt: '', text: 'hunter@ai-expert', delay: 50, isOutput: true },
-        { prompt: '$', text: 'cat expertise.txt', delay: 100 },
-        { prompt: '', text: 'AI Orchestration | LLM Engineering | MCP Servers | 10x Automation', delay: 50, isOutput: true },
-        { prompt: '$', text: 'ls ai-workflows/', delay: 100 },
-        { prompt: '', text: 'multi-agent-system/  mcp-servers/  langchain-rag/  prompt-engineering/', delay: 50, isOutput: true },
-        { prompt: '$', text: 'python ai_productivity.py --measure', delay: 100 },
-        { prompt: '', text: 'Productivity multiplier: 10x while others achieve 1.5x', delay: 50, isOutput: true, isGreen: true },
-        { prompt: '$', text: 'echo $AI_VISION', delay: 100 },
-        { prompt: '', text: 'Seeing what others miss in the AI revolution...', delay: 50, isOutput: true, isGreen: true }
+        { prompt: '', text: 'hunter@ai-automation-expert', delay: 50, isOutput: true },
+        { prompt: '$', text: 'make scenario --create "AI Sales Automation"', delay: 100 },
+        { prompt: '', text: '✓ Workflow created: 50+ automations deployed', delay: 50, isOutput: true, isGreen: true },
+        { prompt: '$', text: 'prohora.app --deploy --production', delay: 100 },
+        { prompt: '', text: '✓ AI scheduling platform launched successfully', delay: 50, isOutput: true, isGreen: true },
+        { prompt: '$', text: 'automation --stats', delay: 100 },
+        { prompt: '', text: 'Total workflows: 50+ | Tasks automated: 10,000+ | Time saved: 90%', delay: 50, isOutput: true },
+        { prompt: '$', text: 'ai-stack --list', delay: 100 },
+        { prompt: '', text: 'Make.com | Claude AI | GPT-4 | LangChain | n8n | MCP Servers', delay: 50, isOutput: true, isGreen: true }
     ];
     
     let commandIndex = 0;

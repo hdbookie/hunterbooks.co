@@ -1,0 +1,30 @@
+# Robots.txt for hunterbooks.co
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+
+# Specific directives for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+# Block access to assets that don't need indexing
+User-agent: *
+Disallow: /assets/js/
+Disallow: /assets/css/
+Allow: /assets/js/translations.js  # Allow for multi-language support
+
+# Sitemap location
+Sitemap: https://hunterbooks.co/sitemap.xml
+
+# Allow crawling of images
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /

@@ -7,18 +7,22 @@ const translations = {
         'nav-about': 'About',
         'nav-projects': 'Projects',
         'nav-skills': 'Skills',
+        'nav-automations': 'Automations',
+        'nav-services': 'Services',
         'nav-contact': 'Contact',
-        'hero-title-1': 'I build AI workflows that unlock',
-        'hero-title-2': '10x productivity',
-        'hero-subtitle': 'AI & Automation Expert • Full Stack Developer • Seeing what others miss in the AI revolution',
-        'hero-cta-projects': 'View Projects',
-        'hero-cta-contact': 'Get in Touch',
+        'hero-title-1': 'I Build AI Systems That',
+        'hero-title-2': 'Automate Everything',
+        'hero-subtitle': 'AI Automation Expert | Make.com Specialist | Building intelligent workflows that save 90% of manual work',
+        'hero-cta-projects': 'See Automation Examples',
+        'hero-cta-contact': 'Get Your AI Audit',
         'about-title': 'About Me',
-        'about-p1': 'I\'m an AI expert who sees the possibilities others miss. While most people are just discovering ChatGPT, I build custom MCP servers, orchestrate multi-agent workflows, and create AI systems that deliver 10x productivity gains. My journey from sales to programming through crypto trading systems taught me to identify inefficiencies and automate them away.',
-        'about-p2': 'Today, I\'m building the AI infrastructure of the future - from SurfHunter (Brazil\'s fastest-growing surf app with 5k+ users) to enterprise AI solutions that slash manual work by 90%. I don\'t just use AI tools; I engineer systems that transform how businesses operate. Most are touching the tip of the iceberg - I dive deep to harness AI\'s full potential.',
+        'about-p1': 'I\'m an AI automation expert who builds the systems others don\'t even know are possible. While most are discovering ChatGPT, I architect custom MCP servers, orchestrate multi-agent workflows, and create Make.com automations that eliminate 90% of manual work. My journey from sales to programming through crypto trading systems taught me to spot inefficiencies and automate them into oblivion.',
+        'about-p2': 'Today I\'m building the future of work automation - from Prohora.app (AI scheduling assistant integrated into WhatsApp) to enterprise automation solutions that save thousands of hours. I don\'t just use AI tools; I engineer systems that fundamentally transform how businesses operate. Fluent in English and Portuguese, and proficient in Spanish, I help companies worldwide achieve 10x productivity gains.',
         'stat-experience': 'Years of Experience',
         'stat-projects': 'Projects Delivered',
         'stat-users': 'Active Users',
+        'stat-languages': 'Languages',
+        'languages-title': 'I work in three languages',
         'stat-code': 'Lines of Code',
         'projects-title': 'Featured Projects',
         'project-ai-orchestrator': 'Advanced AI orchestration system that connects multiple LLMs, automates complex workflows, and multiplies productivity by 10x.',
@@ -30,8 +34,33 @@ const translations = {
         'skill-llm': 'LLM Engineering',
         'skill-mcp': 'MCP Servers',
         'skill-automation': 'AI Automation',
-        'contact-title': 'Let\'s Work Together',
-        'contact-subtitle': 'Specialized in creating software solutions that solve real problems.<br>Available for custom applications, automation projects, and system modernization.',
+        'contact-title': 'Let\'s Automate Your Workflow',
+        'contact-subtitle': 'AI Automation Expert ready to transform your business.<br>Specializing in Make.com workflows, AI integrations, and custom automation solutions.',
+        'automations-title': 'Make.com Automation Workflows',
+        'automations-subtitle': 'I build intelligent automation workflows that connect your tools and multiply productivity. Here are some of the workflows I\'ve created:',
+        'automation-email-title': 'Email → CRM → Slack',
+        'automation-email-desc': 'Automatically captures leads from emails, updates CRM, and notifies sales team. Processes 500+ leads/month with zero manual entry.',
+        'automation-ai-title': 'AI Content Pipeline',
+        'automation-ai-desc': 'AI-powered content creation workflow that generates, optimizes, and publishes content across platforms. 10x content output.',
+        'automation-data-title': 'Data Sync Orchestrator',
+        'automation-data-desc': 'Real-time data synchronization between Google Sheets, databases, and BI tools. Eliminates 15 hours/week of manual reporting.',
+        'automation-custom-title': 'Your Custom Automation',
+        'automation-custom-desc': 'I design and build custom Make.com workflows tailored to your business needs. From simple 2-step automations to complex multi-branch scenarios.',
+        'automation-custom-cta': 'Let\'s Automate Your Workflow',
+        'services-title': 'AI Automation Services',
+        'services-subtitle': 'Transform your business with custom AI solutions that eliminate repetitive work and multiply productivity',
+        'service-make-title': 'Make.com Automation',
+        'service-make-desc': 'Custom workflow design and implementation. From simple 2-step automations to complex multi-branch scenarios with error handling.',
+        'service-ai-title': 'AI Integration',
+        'service-ai-desc': 'Integrate cutting-edge AI models into your existing systems. Claude, GPT-4, and custom LLM solutions.',
+        'service-process-title': 'Process Optimization',
+        'service-process-desc': 'Analyze your workflows and identify automation opportunities. Get a custom roadmap to 10x productivity.',
+        'service-cta-title': 'Ready to Automate Everything?',
+        'service-cta-desc': 'Let\'s discuss how AI automation can transform your business. Free consultation to identify your biggest automation opportunities.',
+        'service-cta-button': 'Book Free Consultation',
+        'service-cta-stories': 'See Success Stories',
+        'success-stories-title': 'Automation Success Stories',
+        'success-stories-subtitle': 'Real results from businesses that transformed their operations with custom automation solutions',
         'footer': 'Made with ❤️ in Florianópolis',
         'testimonials-title': 'What Users Say',
         'github-title': 'GitHub Activity',
@@ -60,18 +89,22 @@ const translations = {
         'nav-about': 'Acerca',
         'nav-projects': 'Proyectos',
         'nav-skills': 'Habilidades',
+        'nav-automations': 'Automatizaciones',
+        'nav-services': 'Servicios',
         'nav-contact': 'Contacto',
-        'hero-title-1': 'Construyo flujos de IA que desbloquean',
-        'hero-title-2': '10x productividad',
-        'hero-subtitle': 'Experto en IA y Automatización • Desarrollador Full Stack • Viendo lo que otros pierden en la revolución de IA',
-        'hero-cta-projects': 'Ver Proyectos',
-        'hero-cta-contact': 'Contactar',
+        'hero-title-1': 'Construyo Sistemas de IA Que',
+        'hero-title-2': 'Automatizan Todo',
+        'hero-subtitle': 'Experto en Automatización con IA | Especialista en Make.com | Creando flujos inteligentes que ahorran 90% del trabajo manual',
+        'hero-cta-projects': 'Ver Ejemplos de Automatización',
+        'hero-cta-contact': 'Obtener Auditoría de IA',
         'about-title': 'Sobre Mí',
-        'about-p1': 'Soy un experto en IA que ve las posibilidades que otros pasan por alto. Mientras la mayoría apenas descubre ChatGPT, yo construyo servidores MCP personalizados, orquesto flujos de trabajo multi-agente y creo sistemas de IA que multiplican la productividad por 10x. Mi transición de ventas a programación a través de sistemas de trading cripto me enseñó a identificar ineficiencias y automatizarlas.',
-        'about-p2': 'Hoy construyo la infraestructura de IA del futuro - desde SurfHunter (la app de surf de más rápido crecimiento en Brasil con 5k+ usuarios) hasta soluciones empresariales de IA que reducen el trabajo manual en un 90%. No solo uso herramientas de IA; diseño sistemas que transforman cómo operan los negocios. La mayoría toca la punta del iceberg - yo me sumerjo profundo para aprovechar todo el potencial de la IA.',
+        'about-p1': 'Soy un experto en automatización con IA que construye sistemas que otros ni siquiera saben que son posibles. Mientras la mayoría descubre ChatGPT, yo arquitecto servidores MCP personalizados, orquesto flujos multi-agente y creo automatizaciones en Make.com que eliminan el 90% del trabajo manual. Mi viaje de ventas a programación a través de sistemas de trading cripto me enseñó a detectar ineficiencias y automatizarlas hasta eliminarlas.',
+        'about-p2': 'Hoy construyo el futuro de la automatización del trabajo - desde Prohora.app (asistente de programación con IA integrado en WhatsApp) hasta soluciones de automatización empresarial que ahorran miles de horas. No solo uso herramientas de IA; diseño sistemas que transforman fundamentalmente cómo operan las empresas. Fluente en inglés y portugués, y competente en español, ayudo a empresas de todo el mundo a lograr ganancias de productividad de 10x.',
         'stat-experience': 'Años de Experiencia',
         'stat-projects': 'Proyectos Entregados',
         'stat-users': 'Usuarios Activos',
+        'stat-languages': 'Idiomas',
+        'languages-title': 'Trabajo en tres idiomas',
         'stat-code': 'Líneas de Código',
         'projects-title': 'Proyectos Destacados',
         'project-ai-orchestrator': 'Sistema avanzado de orquestación de IA que conecta múltiples LLMs, automatiza flujos complejos y multiplica la productividad por 10x.',
@@ -83,8 +116,33 @@ const translations = {
         'skill-llm': 'Ingeniería de LLM',
         'skill-mcp': 'Servidores MCP',
         'skill-automation': 'Automatización con IA',
-        'contact-title': 'Trabajemos Juntos',
-        'contact-subtitle': 'Especializado en crear soluciones de software que resuelven problemas reales.<br>Disponible para aplicaciones personalizadas, proyectos de automatización y modernización de sistemas.',
+        'contact-title': 'Automaticemos Tu Flujo de Trabajo',
+        'contact-subtitle': 'Experto en Automatización con IA listo para transformar tu negocio.<br>Especializado en flujos de Make.com, integraciones de IA y soluciones de automatización personalizadas.',
+        'automations-title': 'Flujos de Automatización Make.com',
+        'automations-subtitle': 'Construyo flujos de automatización inteligentes que conectan tus herramientas y multiplican la productividad. Aquí algunos de los flujos que he creado:',
+        'automation-email-title': 'Email → CRM → Slack',
+        'automation-email-desc': 'Captura automáticamente leads de correos, actualiza el CRM y notifica al equipo de ventas. Procesa 500+ leads/mes sin entrada manual.',
+        'automation-ai-title': 'Pipeline de Contenido con IA',
+        'automation-ai-desc': 'Flujo de creación de contenido impulsado por IA que genera, optimiza y publica contenido en múltiples plataformas. 10x producción de contenido.',
+        'automation-data-title': 'Orquestador de Sincronización de Datos',
+        'automation-data-desc': 'Sincronización de datos en tiempo real entre Google Sheets, bases de datos y herramientas BI. Elimina 15 horas/semana de reportes manuales.',
+        'automation-custom-title': 'Tu Automatización Personalizada',
+        'automation-custom-desc': 'Diseño y construyo flujos de Make.com personalizados para tus necesidades de negocio. Desde automatizaciones simples de 2 pasos hasta escenarios complejos multi-rama.',
+        'automation-custom-cta': 'Automaticemos Tu Flujo de Trabajo',
+        'services-title': 'Servicios de Automatización con IA',
+        'services-subtitle': 'Transforma tu negocio con soluciones de IA personalizadas que eliminan el trabajo repetitivo y multiplican la productividad',
+        'service-make-title': 'Automatización Make.com',
+        'service-make-desc': 'Diseño e implementación de flujos personalizados. Desde automatizaciones simples de 2 pasos hasta escenarios complejos con manejo de errores.',
+        'service-ai-title': 'Integración de IA',
+        'service-ai-desc': 'Integra modelos de IA de vanguardia en tus sistemas existentes. Claude, GPT-4 y soluciones LLM personalizadas.',
+        'service-process-title': 'Optimización de Procesos',
+        'service-process-desc': 'Analiza tus flujos de trabajo e identifica oportunidades de automatización. Obtén una hoja de ruta personalizada para multiplicar la productividad por 10x.',
+        'service-cta-title': '¿Listo para Automatizar Todo?',
+        'service-cta-desc': 'Hablemos sobre cómo la automatización con IA puede transformar tu negocio. Consulta gratuita para identificar tus mayores oportunidades de automatización.',
+        'service-cta-button': 'Reservar Consulta Gratuita',
+        'service-cta-stories': 'Ver Casos de Éxito',
+        'success-stories-title': 'Casos de Éxito en Automatización',
+        'success-stories-subtitle': 'Resultados reales de empresas que transformaron sus operaciones con soluciones de automatización personalizadas',
         'footer': 'Hecho con ❤️ en Florianópolis',
         'testimonials-title': 'Lo Que Dicen los Usuarios',
         'github-title': 'Actividad en GitHub',
@@ -113,18 +171,22 @@ const translations = {
         'nav-about': 'Sobre',
         'nav-projects': 'Projetos',
         'nav-skills': 'Habilidades',
+        'nav-automations': 'Automações',
+        'nav-services': 'Serviços',
         'nav-contact': 'Contato',
-        'hero-title-1': 'Construo fluxos de IA que desbloqueiam',
-        'hero-title-2': '10x produtividade',
-        'hero-subtitle': 'Especialista em IA e Automação • Desenvolvedor Full Stack • Enxergando o que outros perdem na revolução da IA',
-        'hero-cta-projects': 'Ver Projetos',
-        'hero-cta-contact': 'Entrar em Contato',
+        'hero-title-1': 'Eu Construo Sistemas de IA Que',
+        'hero-title-2': 'Automatizam Tudo',
+        'hero-subtitle': 'Especialista em Automação com IA | Especialista em Make.com | Criando fluxos inteligentes que economizam 90% do trabalho manual',
+        'hero-cta-projects': 'Ver Exemplos de Automação',
+        'hero-cta-contact': 'Obter Auditoria de IA',
         'about-title': 'Sobre Mim',
-        'about-p1': 'Sou um especialista em IA que enxerga possibilidades que outros nem imaginam. Enquanto a maioria está descobrindo o ChatGPT, eu construo servidores MCP customizados, orquestro fluxos de trabalho multi-agentes e crio sistemas de IA que multiplicam a produtividade em 10x. Minha jornada de vendas para programação através de sistemas de trading cripto me ensinou a identificar ineficiências e automatizá-las.',
-        'about-p2': 'Hoje construo a infraestrutura de IA do futuro - do SurfHunter (o app de surf que mais cresce no Brasil com 5k+ usuários) a soluções empresariais de IA que reduzem trabalho manual em 90%. Não apenas uso ferramentas de IA; eu projeto sistemas que transformam como negócios operam. A maioria toca a ponta do iceberg - eu mergulho fundo para aproveitar todo o potencial da IA.',
+        'about-p1': 'Sou um especialista em automação com IA que constrói sistemas que outros nem sabem que são possíveis. Enquanto a maioria descobre o ChatGPT, eu arquiteto servidores MCP customizados, orquestro fluxos multi-agentes e crio automações no Make.com que eliminam 90% do trabalho manual. Minha jornada de vendas para programação através de sistemas de trading cripto me ensinou a detectar ineficiências e automatizá-las até o esquecimento.',
+        'about-p2': 'Hoje estou construindo o futuro da automação do trabalho - do Prohora.app (assistente de agendamento com IA integrado no WhatsApp) a soluções de automação empresarial que economizam milhares de horas. Não apenas uso ferramentas de IA; eu projeto sistemas que transformam fundamentalmente como as empresas operam. Fluente em inglês e português, e proficiente em espanhol, ajudo empresas em todo o mundo a alcançar ganhos de produtividade de 10x.',
         'stat-experience': 'Anos de Experiência',
         'stat-projects': 'Projetos Entregues',
         'stat-users': 'Usuários Ativos',
+        'stat-languages': 'Idiomas',
+        'languages-title': 'Trabalho em três idiomas',
         'stat-code': 'Linhas de Código',
         'projects-title': 'Projetos em Destaque',
         'project-ai-orchestrator': 'Sistema avançado de orquestração de IA que conecta múltiplos LLMs, automatiza fluxos complexos e multiplica produtividade em 10x.',
@@ -136,8 +198,33 @@ const translations = {
         'skill-llm': 'Engenharia de LLM',
         'skill-mcp': 'Servidores MCP',
         'skill-automation': 'Automação com IA',
-        'contact-title': 'Vamos Trabalhar Juntos',
-        'contact-subtitle': 'Especializado em criar soluções de software que resolvem problemas reais.<br>Disponível para aplicações customizadas, projetos de automação e modernização de sistemas.',
+        'contact-title': 'Vamos Automatizar Seu Fluxo de Trabalho',
+        'contact-subtitle': 'Especialista em Automação com IA pronto para transformar seu negócio.<br>Especializado em fluxos Make.com, integrações de IA e soluções de automação personalizadas.',
+        'automations-title': 'Fluxos de Automação Make.com',
+        'automations-subtitle': 'Eu construo fluxos de automação inteligentes que conectam suas ferramentas e multiplicam a produtividade. Aqui estão alguns dos fluxos que criei:',
+        'automation-email-title': 'Email → CRM → Slack',
+        'automation-email-desc': 'Captura automaticamente leads de e-mails, atualiza o CRM e notifica a equipe de vendas. Processa 500+ leads/mês sem entrada manual.',
+        'automation-ai-title': 'Pipeline de Conteúdo com IA',
+        'automation-ai-desc': 'Fluxo de criação de conteúdo alimentado por IA que gera, otimiza e publica conteúdo em múltiplas plataformas. 10x produção de conteúdo.',
+        'automation-data-title': 'Orquestrador de Sincronização de Dados',
+        'automation-data-desc': 'Sincronização de dados em tempo real entre Google Sheets, bancos de dados e ferramentas BI. Elimina 15 horas/semana de relatórios manuais.',
+        'automation-custom-title': 'Sua Automação Personalizada',
+        'automation-custom-desc': 'Eu projeto e construo fluxos Make.com personalizados para as necessidades do seu negócio. De automações simples de 2 etapas a cenários complexos multi-ramificação.',
+        'automation-custom-cta': 'Vamos Automatizar Seu Fluxo de Trabalho',
+        'services-title': 'Serviços de Automação com IA',
+        'services-subtitle': 'Transforme seu negócio com soluções de IA personalizadas que eliminam trabalho repetitivo e multiplicam a produtividade',
+        'service-make-title': 'Automação Make.com',
+        'service-make-desc': 'Design e implementação de fluxos personalizados. De automações simples de 2 etapas a cenários complexos com tratamento de erros.',
+        'service-ai-title': 'Integração de IA',
+        'service-ai-desc': 'Integre modelos de IA de ponta em seus sistemas existentes. Claude, GPT-4 e soluções LLM personalizadas.',
+        'service-process-title': 'Otimização de Processos',
+        'service-process-desc': 'Analise seus fluxos de trabalho e identifique oportunidades de automação. Obtenha um roteiro personalizado para multiplicar a produtividade por 10x.',
+        'service-cta-title': 'Pronto para Automatizar Tudo?',
+        'service-cta-desc': 'Vamos discutir como a automação com IA pode transformar seu negócio. Consulta gratuita para identificar suas maiores oportunidades de automação.',
+        'service-cta-button': 'Agendar Consulta Gratuita',
+        'service-cta-stories': 'Ver Casos de Sucesso',
+        'success-stories-title': 'Casos de Sucesso em Automação',
+        'success-stories-subtitle': 'Resultados reais de empresas que transformaram suas operações com soluções de automação personalizadas',
         'footer': 'Feito com ❤️ em Florianópolis',
         'testimonials-title': 'O Que os Usuários Dizem',
         'github-title': 'Atividade no GitHub',
@@ -200,6 +287,12 @@ function initializeLanguage() {
         }
     });
     
+    // Update dropdown selection
+    const languageSelect = document.getElementById('languageSelect');
+    if (languageSelect) {
+        languageSelect.value = currentLang;
+    }
+    
     // Language switcher event listeners
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', () => {
@@ -210,6 +303,28 @@ function initializeLanguage() {
             // Update active state
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
+            
+            // Update dropdown
+            if (languageSelect) {
+                languageSelect.value = lang;
+            }
         });
     });
+    
+    // Dropdown event listener
+    if (languageSelect) {
+        languageSelect.addEventListener('change', (e) => {
+            const lang = e.target.value;
+            localStorage.setItem('preferredLanguage', lang);
+            applyTranslations(lang);
+            
+            // Update button state
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+        });
+    }
 }
